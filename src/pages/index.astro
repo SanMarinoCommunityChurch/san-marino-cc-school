@@ -1,0 +1,33 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "@astrojs/image/components";
+
+import heroImg from "../assets/images/SMCC-NurserySchool_038.jpg";
+---
+
+<Layout>
+  <main slot="main">
+    <article
+      class="relative min-h-[60vh] max-h-[80vh] overflow-hidden flex flex-col justify-center items-start"
+    >
+      <div class="content-wrapper relative z-[3] my-32 text-white flow">
+        <h1 class="text-heading text-6xl font-bold">
+          Where young minds can thrive
+        </h1>
+        <p>
+          We aim to provide children with a warm, secure, and stimulating
+          environment where they can develop and thrive at their own pace.
+        </p>
+        <a href="#">Learn more</a>
+      </div>
+      <div class="absolute inset-0 z-[2]"></div>
+      <Image
+        src={heroImg}
+        alt=""
+        width={1200}
+        format="webp"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+    </article>
+  </main>
+</Layout>

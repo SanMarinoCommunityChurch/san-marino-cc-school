@@ -1,0 +1,76 @@
+---
+import { SEO } from "astro-seo";
+import { Image } from "@astrojs/image/components";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import "../styles/global.css";
+
+const siteMeta = {
+  title: "San Marino Community Church Nursery School",
+  description:
+    "SMCCNS is a community of children, families, and teachers committed to learning and growing through a process of research and discovery.",
+};
+
+const { meta = siteMeta } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <SEO
+      title={meta.title}
+      description={meta.description}
+      openGraph={{
+        basic: {
+          title: meta.openGraph ? meta.openGraph.title : meta.title,
+          type: "website",
+          image: "/SMCC-NurserySchool_080.jpg",
+        },
+        optional: {
+          description: meta.openGraph
+            ? meta.openGraph.description
+            : meta.description,
+        },
+      }}
+    />
+    <slot name="pageHead" />
+    <style>
+      @font-face {
+        font-family: "Nunito";
+        src: url("/fonts/Nunito-Regular.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Nunito";
+        src: url("/fonts/Nunito-Italic.woff2") format("woff2");
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Nunito";
+        src: url("/fonts/Nunito-Bold.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Mali";
+        src: url("/fonts/Mali-Bold.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+  </head>
+  <body class="font-sans text-lg leading-normal">
+    <SiteHeader />
+    <slot name="main" />
+    <SiteFooter />
+  </body>
+</html>
