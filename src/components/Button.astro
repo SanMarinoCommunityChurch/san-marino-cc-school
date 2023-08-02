@@ -1,0 +1,86 @@
+---
+const baseStyles = {
+  solid:
+    "inline-flex items-center px-4 py-2 leading-tight gap-2 rounded-md transition-colors",
+  none: "inline-flex items-center px-2 py-1 leading-tight gap-2 rounded-md transition-colors",
+  // outline: ,
+  // nav: ,
+  // highlight:
+};
+
+const styles = {
+  solid: {
+    primary: "bg-brand-dark text-white hover:bg-brand",
+    rainbow: "rainbow-btn",
+  },
+  none: {
+    primary: "bg-transparent hover:bg-gray-100",
+  },
+};
+
+const widths = {
+  fit: "w-fit",
+  full: "w-full",
+};
+
+const {
+  type = "solid",
+  style = "primary",
+  width = "fit",
+  href,
+  className,
+  ...props
+} = Astro.props;
+
+const classList = [
+  baseStyles[type],
+  styles[type][style],
+  widths[width],
+  className,
+];
+---
+
+{
+  href ? (
+    <a href={href} class:list={classList} {...props}>
+      <slot>Link</slot>
+    </a>
+  ) : (
+    <button class:list={classList} {...props}>
+      <slot>Button</slot>
+    </button>
+  )
+}
+
+<style>
+  .rainbow-btn {
+    position: relative;
+    background: linear-gradient(
+      126deg,
+      theme("colors.accent.red"),
+      theme("colors.accent.yellow"),
+      theme("colors.brand.light")
+    );
+    padding: 3px;
+    transition: all 0.2s ease;
+  }
+
+  .rainbow-btn:hover {
+    padding: 4px;
+  }
+
+  /* .rainbow-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    z-index: -1;
+    border-radius: 0.375rem;
+    background: linear-gradient(
+      126deg,
+      theme("colors.accent.red"),
+      theme("colors.accent.yellow"),
+      theme("colors.brand.light")
+    );
+  } */
+</style>

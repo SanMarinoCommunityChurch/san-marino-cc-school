@@ -1,0 +1,69 @@
+---
+import SectionPage from "@layouts/SectionPage.astro";
+import IntroSection from "@components/IntroSection.astro";
+import RichContent from "@components/RichContent.astro";
+import FeatureLink from "@components/FeatureLink.astro";
+import FeatureList from "@components/FeatureList.astro";
+import IntroSectionList from "@components/IntroSectionList.astro";
+import HighlightsGrid from "@components/HighlightsGrid.astro";
+import CTA from "@components/CTA.astro";
+import FAQSection from "@components/FAQSection.astro";
+import { pages } from "@lib/pages";
+
+export async function getStaticPaths() {
+  const allPages = pages;
+  return allPages.map((page) => {
+    return {
+      params: {
+        path: page.sectionSlug ? page.slug.full : page.slug.current,
+      },
+      props: { page },
+    };
+  });
+}
+const { path } = Astro.params;
+const { page } = Astro.props;
+---
+
+<SectionPage pageName={page.pageName} headerText={page.headerText}>
+  <div class="flow | gap-32 my-24">
+    {
+      page.pageContent ? (
+        page.pageContent.map((section) => {
+          return (
+            <>
+              {section.type == "introSections" && (
+                <article class="content-wrapper">
+                  <IntroSectionList content={section} />
+                </article>
+              )}
+              {section.type == "contentFeatures" && (
+                <article class="content-wrapper">
+                  <FeatureList content={section} />
+                </article>
+              )}
+              {section.type == "highlightGrid" && (
+                <article class="content-wrapper">
+                  <HighlightsGrid content={section} />
+                </article>
+              )}
+              {section.type == "faq" && (
+                <article class="content-wrapper">
+                  <FAQSection content={section} />
+                </article>
+              )}
+              {section.type == "richContent" && (
+                <article class="content-wrapper">
+                  <RichContent content={section.portableText} />
+                </article>
+              )}
+              {section.type == "cta" && <CTA content={section} />}
+            </>
+          );
+        })
+      ) : (
+        <div>No content added yet!</div>
+      )
+    }
+  </div>
+</SectionPage>

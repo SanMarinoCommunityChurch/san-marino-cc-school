@@ -1,0 +1,18 @@
+---
+import { urlFor } from "@lib/sanity";
+const { content } = Astro.props;
+---
+
+<div>
+  <div class="center-items mb-12">
+    {content.heading && <h2 class="text-4xl mb-6">{content.heading}</h2>}
+    {
+      content.text && (
+        <p class="text-2xl leading-normal max-w-3xl">{content.text}</p>
+      )
+    }
+  </div>
+  <div></div>
+</div>
+
+<style></style>

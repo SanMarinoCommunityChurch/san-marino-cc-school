@@ -1,0 +1,45 @@
+---
+import Button from "./Button.astro";
+import constructHref from "../utils/constructHref";
+
+const { content } = Astro.props;
+let showHeadingSection = false;
+if (content.heading) {
+  showHeadingSection = true;
+} else if (content.text) {
+  showHeadingSection = true;
+}
+---
+
+<div>
+  {
+    showHeadingSection && (
+      <div class="center-items mb-20">
+        {content.heading && <h2 class="text-4xl mb-6">{content.heading}</h2>}
+        {content.text && (
+          <p class="text-2xl leading-normal max-w-3xl">{content.text}</p>
+        )}
+      </div>
+    )
+  }
+  <div class="grid grid-cols-3 gap-x-8 gap-y-16">
+    {
+      content.entries.map((item) => (
+        <div class="flow gap-6">
+          <h3 class="text-2xl">{item.heading}</h3>
+          <p>{item.text}</p>
+          {item.linkItem && (
+            <div class="relative -left-2">
+              <Button type="none" href={constructHref(item.linkItem.link)}>
+                <span>
+                  {item.linkItem.linkName || item.linkItem.link.pageName}
+                </span>
+                <i class="fa-solid fa-arrow-right fa-xs text-brand" />
+              </Button>
+            </div>
+          )}
+        </div>
+      ))
+    }
+  </div>
+</div>

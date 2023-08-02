@@ -1,0 +1,73 @@
+---
+import { urlFor } from "@lib/sanity";
+import getYouTubeID from "get-youtube-id";
+import { PortableText } from "astro-portabletext";
+
+const { content, layout = "default" } = Astro.props;
+---
+
+<section
+  class="with-sidebar intro"
+  data-layout={layout == "flipped" ? "flipped" : "default"}
+>
+  <div>
+    {
+      content.heading && (
+        <h2 class="text-3xl mb-6 text-brand-dark">{content.heading}</h2>
+      )
+    }
+    <div class="text-xl leading-relaxed flow">
+      <PortableText value={content.portableText} />
+    </div>
+  </div>
+  {
+    content.mediaType == "image" ? (
+      <div>
+        <img
+          src={urlFor(content.image)
+            .width(900)
+            .height(675)
+            .auto("format")
+            .url()}
+          alt={content.image.asset.altText || ""}
+          class="img rounded-md"
+          width={900}
+          height={675}
+          style={`background-image: url(${content.image.asset.metadata.lqip})`}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    ) : content.mediaType == "video" ? (
+      <iframe
+        width="560"
+        height="315"
+        class="border-0"
+        src={`https://www.youtube.com/embed/${getYouTubeID(content.video.url)}`}
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      />
+    ) : (
+      <div />
+    )
+  }
+</section>
+
+<style>
+  .intro.with-sidebar {
+    --sidebar-gap: 5rem;
+    --sidebar-min-width: 32rem;
+    align-items: center;
+  }
+
+  [data-layout="flipped"] > :first-child {
+    order: 2;
+  }
+
+  .img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+</style>

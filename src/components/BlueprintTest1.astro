@@ -1,0 +1,9 @@
+---
+import { urlFor } from "@lib/sanity";
+const { page, content } = Astro.props;
+---
+
+<div>
+  <h1>{page.pageName}</h1>
+  <img src={urlFor(content.image).width(900).url()} alt="" class="max-w-lg" />
+</div>

@@ -1,0 +1,20 @@
+---
+import InlineImage from "@components/InlineImage.astro";
+import InlineYoutubeEmbed from "@components/InlineYoutubeEmbed.astro";
+import { PortableText } from "astro-portabletext";
+const { content } = Astro.props;
+---
+
+<article
+  class="prose max-w-3xl mx-auto prose-h2:text-3xl prose-p:text-gray-500 prose-p:leading-normal prose-p:text-lg prose-a:text-brand-dark prose-a:underline hover:prose-a:no-underline prose-img:rounded-md"
+>
+  <PortableText
+    value={content}
+    components={{
+      type: {
+        image: InlineImage,
+        youtube: InlineYoutubeEmbed,
+      },
+    }}
+  />
+</article>

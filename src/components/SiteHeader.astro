@@ -1,21 +1,56 @@
+---
+import Button from "./Button.astro";
+import NavMenu from "@components/React/NavMenu.jsx";
+import constructHref from "../utils/constructHref";
+
+const { mainNavigation } = Astro.props;
+---
+
 <header
-  class="px-12 py-6 flex justify-between items-center bg-white shadow-lg z-50"
+  class="px-12 py-6 flex justify-between items-center bg-white shadow-xl z-50"
 >
   <div class="flex flex-wrap gap-8 items-center">
     <a href="/" class="logo">
       <img src="/smccns-logo.png" width="100" alt="" />
     </a>
-    <nav class="flex gap-6 items-center">
-      <a href="#">About</a>
-      <a href="#">Programs</a>
-      <a href="#">Enrollment</a>
-      <a href="#">Community</a>
-      <a href="#">Contact</a>
+    <nav class="flex gap-8 items-center">
+      {
+        mainNavigation.entries.map((navItem) => {
+          return (
+            <>
+              {navItem.type === "navigationSection" && (
+                <NavMenu
+                  client:load
+                  title={navItem.sectionName}
+                  entries={navItem.sectionLinks}
+                />
+              )}
+              {navItem.type === "link" && (
+                <Button type="none" href={constructHref(navItem.link)}>
+                  {navItem.linkName || navItem.link.pageName}
+                </Button>
+              )}
+            </>
+          );
+        })
+      }
     </nav>
   </div>
   <div class="flex gap-6 items-center">
-    <a href="#">Parents Portal</a>
-    <a href="#">Virtual Tour</a>
-    <a href="#">Donate</a>
+    <Button href="#" style="rainbow">
+      <span class="rainbow-btn-text">Donate</span>
+    </Button>
   </div>
 </header>
+
+<style>
+  .rainbow-btn-text {
+    position: relative;
+    background-color: white;
+    border-radius: 3px;
+    z-index: 1;
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
+    color: theme("colors.accent.red");
+  }
+</style>

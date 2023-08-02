@@ -1,1 +1,42 @@
-<footer>Footer</footer>
+---
+import { DateTime } from "luxon";
+import Button from "./Button.astro";
+import constructHref from "../utils/constructHref";
+const date = DateTime.now();
+
+const { mainNavigation } = Astro.props;
+---
+
+<footer class="content-wrapper border-t border-gray-200 pt-16">
+  <div class="grid grid-cols-7 gap-4">
+    <iframe class="col-span-2 w-full max-h-48 pr-8" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3303.166347003515!2d-118.1188203237824!3d34.11649087313277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c4cbbc2e5e83%3A0xa506500431a79522!2s1750%20Virginia%20Rd%2C%20San%20Marino%2C%20CA%2091108!5e0!3m2!1sen!2sus!4v1690830080049!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+     {
+        mainNavigation.entries.map((navItem) => {
+          return (
+          <>
+            {navItem.type === 'navigationSection' && 
+              <div>
+                <div class="font-bold text-xl text-gray-800">{navItem.sectionName}</div>
+                <ul class="-ml-2 mt-3">
+                  {navItem.sectionLinks.map((entry) => {
+                    return (
+                    <li>
+                      <a
+                        href={constructHref(entry.link)}
+                        class="hover:text-brand-dark hover:bg-brand-light/10 inline-block w-full rounded-sm p-2 text-base leading-tight"
+                      >
+                        {entry.linkName || entry.link.pageName}
+                      </a></li>  
+                  )})}
+                </ul>
+              </div>
+            }
+            {navItem.type === 'link' && <Button width="fit" type="none" className="place-self-start" href={constructHref(navItem.link)}>{navItem.linkName || navItem.link.pageName}</Button>}
+          </>
+        )})
+      }
+  </div>
+  <div class="py-8 text-center text-sm">
+    © {date.toFormat("yyyy")} San Marino Community Church Nursery School
+  </div>
+</footer>

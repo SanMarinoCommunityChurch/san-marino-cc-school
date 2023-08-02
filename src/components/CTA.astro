@@ -1,0 +1,41 @@
+---
+import Button from "./Button.astro";
+import { urlFor } from "@lib/sanity";
+import constructHref from "../utils/constructHref";
+
+const { content } = Astro.props;
+let overlayColor = "bg-[#00000093]";
+if (content.accent === "brand-light") {
+  overlayColor = "bg-brand-light/20";
+} else if (content.accent === "brand-dark") {
+  overlayColor = "bg-[#0F1A3D]/70";
+} else if (content.accent === "accent-red") {
+  overlayColor = "bg-accent-red/90";
+} else if (content.accent === "accent-yellow") {
+  overlayColor = "bg-accent-yellow/20";
+}
+---
+
+<article class="relative">
+  <div
+    class="content-wrapper | flow | py-28 gap-12 z-[2] text-center items-center"
+  >
+    <h2 class="text-5xl text-white">{content.heading}</h2>
+    {content.text && <p class="text-xl text-white max-w-4xl">{content.text}</p>}
+    {
+      content.linkItem && (
+        <Button href={constructHref(content.linkItem.link)}>
+          {content.linkItem.linkName || content.linkItem.link.pageName}
+        </Button>
+      )
+    }
+  </div>
+  <div class:list={["absolute inset-0 z-[1] mix-blend-multiply", overlayColor]}>
+  </div>
+  <img
+    src={urlFor(content.image).width(1200).auto("format").url()}
+    alt=""
+    width={1200}
+    class="absolute inset-0 w-full h-full object-cover saturate-0 opacity-40"
+  />
+</article>

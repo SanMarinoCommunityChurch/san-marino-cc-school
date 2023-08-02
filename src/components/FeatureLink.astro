@@ -1,0 +1,99 @@
+---
+import Button from "./Button.astro";
+import { urlFor } from "../lib/sanity";
+import constructHref from "../utils/constructHref"
+
+const themes = {
+  "brand-light": {
+    bg: 'bg-brand-light/30',
+    color: 'text-brand'
+  },
+  "accent-red": {
+    bg: 'bg-accent-red/30',
+    color: 'text-accent-red'
+  },
+  "accent-yellow": {
+    bg: 'bg-accent-yellow/20',
+    color: 'text-accent-yellow'
+  }
+};
+
+const layouts = {
+  "image-left": "image-left",
+  "image-right": "image-right",
+};
+
+const { content, theme = "brand-light", layout = "image-left" } = Astro.props;
+
+// const { heading, text, image } = content;
+let href = constructHref(content.linkItem.link);
+let linkName = content.linkItem.linkName || content.linkItem.link.pageName;
+---
+
+<article
+  class="relative grid grid-cols-7 gap-8 items-center py-12"
+  data-theme={themes[theme]}
+  data-layout={layouts[layout]}
+>
+  <a
+    href={href}
+    class="col-span-3 hover:[&>img]:scale-105 overflow-hidden rounded-md"
+  >
+    <img
+      class="img rounded-md transition-transform duration-300"
+      src={urlFor(content.image).width(800).height(640).auto("format").url()}
+      alt={content.image.asset.altText || ""}
+      width={800}
+      height={640}
+      style={`background-image: url(${content.image.asset.metadata.lqip})`}
+      loading="lazy"
+      decoding="async"
+    />
+  </a>
+  <div class="feature-text | flow gap-4 | col-span-3 pl-4 pr-0">
+        <h2 class="text-3xl">{content.heading}</h2>
+        <p>{content.text}</p>
+        <div class="relative -left-2">
+            <Button type="none" href={href}>
+            <span>{linkName}</span>
+            <i class:list={["fa-solid fa-arrow-right fa-xs", themes[theme].color]}></i>
+            </Button>
+        </div>
+  </div>
+  <!-- <div class={themes[theme] == "light" ? "overlay-right" : "overlay-left"}> -->
+  </div>
+  <div class:list={["feature-bg", "absolute w-full h-full z-[-2] rounded-md", themes[theme].bg]}></div>
+</article>
+
+<style>
+.img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .feature-text {
+    grid-column: span 3;
+    padding-left: 1rem;
+    padding-right: 0;
+  }
+
+  .feature-bg {
+    grid-column: 3/8;
+  }
+
+  [data-layout="image-right"] > a {
+    order: 2
+  }
+
+  [data-layout="image-right"] .feature-text {
+    order: 1;
+    padding-left: 0;
+    padding-right: 1rem;
+    grid-column: 2 / span 3;
+  }
+
+  [data-layout="image-right"] .feature-bg {
+    grid-column: 1/6;
+  }
+</style>

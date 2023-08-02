@@ -1,34 +1,111 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { Image } from "@astrojs/image/components";
+import Button from "@components/Button.astro";
+import HighlightsGrid from "@components/HighlightsGrid.astro";
+import CTA from "@components/CTA.astro";
+import HomeFeatures from "@components/React/HomeFeatures.jsx";
+import { homePage } from "@lib/pages";
+import { urlFor } from "@lib/sanity";
+import constructHref from "../utils/constructHref";
 
-import heroImg from "../assets/images/SMCC-NurserySchool_038.jpg";
+// import heroImg from "../assets/images/SMCC-NurserySchool_038.jpg";
+// const placeholder = [
+//   {
+//     title: "Our Mission",
+//     description:
+//       "Providing a Christian atmosphere that offers young children the opportunity to learn.",
+//     link: {
+//       name: "Learn More",
+//       href: "/",
+//     },
+//   },
+//   {
+//     title: "Programs",
+//     description:
+//       "Providing a Christian atmosphere that offers young children the opportunity to learn.",
+//     link: {
+//       name: "Learn More",
+//       href: "/",
+//     },
+//   },
+//   {
+//     title: "Community",
+//     description:
+//       "Providing a Christian atmosphere that offers young children the opportunity to learn.",
+//     link: {
+//       name: "Learn More",
+//       href: "/",
+//     },
+//   },
+// ];
+const { hero, intro, presentation, cta, meta } = homePage;
 ---
 
 <Layout>
   <main slot="main">
     <article
-      class="relative min-h-[60vh] max-h-[80vh] overflow-hidden flex flex-col justify-center items-start"
+      class="relative max-h-[90vh] overflow-hidden flex flex-col justify-center items-start"
     >
-      <div class="content-wrapper relative z-[3] my-32 text-white flow">
-        <h1 class="text-heading text-6xl font-bold">
-          Where young minds can thrive
-        </h1>
-        <p>
-          We aim to provide children with a warm, secure, and stimulating
-          environment where they can develop and thrive at their own pace.
-        </p>
-        <p>I'm adding a new paragraph here.</p>
-        <a href="#">Learn more</a>
+      <div class="content-wrapper | w-full relative z-[3] my-32 text-white">
+        <div class="flow | gap-8 | max-w-2xl">
+          <h1 class="text-heading text-6xl font-bold text-white">
+            {hero.heading}
+          </h1>
+          <p>
+            {hero.text}
+          </p>
+          <Button href={constructHref(hero.linkItem.link)}>
+            {hero.linkItem.linkName || hero.linkItem.link.pageName}
+          </Button>
+        </div>
       </div>
-      <div class="absolute inset-0 z-[2]"></div>
-      <Image
-        src={heroImg}
-        alt=""
-        width={1200}
-        format="webp"
+      <div
+        class="absolute inset-0 z-[2] bg-gradient-to-r from-[#000000b3] to-[#00000000]"
+      >
+      </div>
+      <img
+        src={urlFor(hero.image).width(1400).auto("format").url()}
+        alt={hero.image.asset.altText || ""}
+        width={1400}
         class="absolute inset-0 w-full h-full object-cover"
       />
+      <div
+        class="content-wrapper | absolute bottom-0 left-0 right-0 w-full h-12"
+      >
+        <div class="absolute inset-0 mx-4 mt-4 z-[5] rounded-t-md bg-white">
+        </div>
+        <div class="absolute z-[4] inset-0 rounded-t-lg rainbow-gradient"></div>
+      </div>
     </article>
+    <div class="content-wrapper">
+      <article class="px-6 pt-8 mb-32">
+        <div class="">
+          <h2 class="sr-only">About</h2>
+          <HighlightsGrid content={intro} />
+        </div>
+      </article>
+    </div>
+    <article class="py-24 pattern-bg relative">
+      <div class="content-wrapper">
+        <p class="text-center text-2xl max-w-3xl mx-auto">
+          {presentation.text}
+        </p>
+        <HomeFeatures client:load entries={presentation.entries} />
+        <div class="mx-auto text-center">
+          <Button href={constructHref(presentation.linkItem.link)}>
+            {presentation.linkItem.linkName || hero.linkItem.link.pageName}
+          </Button>
+        </div>
+      </div>
+    </article>
+    <CTA content={cta} />
   </main>
 </Layout>
+
+<style>
+  .pattern-bg {
+    background-color: #eafbff;
+    background-image: url("data:image/svg+xml,%3Csvg width='92' height='66' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2339bdde' fill-opacity='0.13'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+</style>
