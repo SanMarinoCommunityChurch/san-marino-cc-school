@@ -1,4 +1,4 @@
-import {HiCog, HiCube, HiDocument, HiHome, HiUsers} from 'react-icons/hi2'
+import {HiCog, HiCube, HiDocument, HiHome, HiSquares2X2, HiTag, HiUsers} from 'react-icons/hi2'
 
 export const deskStructure = (S) =>
   S.list()
@@ -16,6 +16,23 @@ export const deskStructure = (S) =>
                 .title('Testimonials')
                 .icon(HiUsers)
                 .child(S.documentTypeList('testimonial').title('All Testimonials')),
+              S.listItem()
+                .title('News Posts')
+                .icon(HiSquares2X2)
+                .child(
+                  S.list()
+                    .title('News Posts')
+                    .items([
+                      S.listItem()
+                        .title('All Posts')
+                        .icon(HiSquares2X2)
+                        .child(S.documentTypeList('post').title('All Posts')),
+                      S.listItem()
+                        .title('Post Types')
+                        .icon(HiTag)
+                        .child(S.documentTypeList('postType').title('PostTypes')),
+                    ])
+                ),
             ])
         ),
       S.divider(),

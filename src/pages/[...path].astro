@@ -3,6 +3,7 @@ import SectionPage from "@layouts/SectionPage.astro";
 import IntroSection from "@components/IntroSection.astro";
 import RichContent from "@components/RichContent.astro";
 import FeatureLink from "@components/FeatureLink.astro";
+import Gallery from "@components/Gallery.astro";
 import FeatureList from "@components/FeatureList.astro";
 import IntroSectionList from "@components/IntroSectionList.astro";
 import HighlightsGrid from "@components/HighlightsGrid.astro";
@@ -47,8 +48,13 @@ const { page } = Astro.props;
                   <HighlightsGrid content={section} />
                 </article>
               )}
-              {section.type == "faq" && (
+              {section.type == "gallery" && (
                 <article class="content-wrapper">
+                  <Gallery content={section} />
+                </article>
+              )}
+              {section.type == "faq" && (
+                <article class="content-wrapper w-full">
                   <FAQSection content={section} />
                 </article>
               )}

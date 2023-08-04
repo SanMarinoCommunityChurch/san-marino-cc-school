@@ -7,6 +7,8 @@ import introSection from './introSection.jsx'
 import gallery from './gallery'
 import featureLinks from './featureLinks'
 import faq from './faq'
+import postType from './postType'
+import post from './post'
 import highlightGrid from './highlightGrid'
 import contentFeature from './contentFeature'
 import callToAction from './callToAction'
@@ -30,6 +32,8 @@ export const schemaTypes = [
   textAndImageBlocks,
   callToAction,
   richContent,
+  post,
+  postType,
   link,
   testimonial,
   navigation,

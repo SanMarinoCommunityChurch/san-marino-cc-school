@@ -1,18 +1,126 @@
 ---
 import { urlFor } from "@lib/sanity";
 const { content } = Astro.props;
+
+let showHeadingSection = false;
+if (content.heading) {
+  showHeadingSection = true;
+} else if (content.text) {
+  showHeadingSection = true;
+}
 ---
 
-<div>
-  <div class="center-items mb-12">
-    {content.heading && <h2 class="text-4xl mb-6">{content.heading}</h2>}
-    {
-      content.text && (
-        <p class="text-2xl leading-normal max-w-3xl">{content.text}</p>
-      )
-    }
-  </div>
-  <div></div>
+<div
+  class="p-16 rounded-lg bg-gradient-to-r from-brand-light/10 to-brand-light/40"
+>
+  {
+    showHeadingSection && (
+      <div class="center-items mb-12">
+        {content.heading && (
+          <h2 class="text-4xl mb-6" id="slider-heading">
+            {content.heading}
+          </h2>
+        )}
+        {content.text && (
+          <p class="text-2xl leading-normal max-w-3xl">{content.text}</p>
+        )}
+      </div>
+    )
+  }
+  <section>
+    <div class="splide" id="main-slider" aria-labelledby="slider-heading">
+      <div class="splide__arrows"></div>
+      <div class="track-mask splide__track">
+        <ul class="splide__list">
+          {
+            content.entries.map((slide) => {
+              return (
+                <li class="splide__slide rounded-md">
+                  <img
+                    class="w-full h-auto rounded-md"
+                    src={urlFor(slide)
+                      .width(1200)
+                      .height(800)
+                      .auto("format")
+                      .url()}
+                    width={1200}
+                    height={800}
+                    alt={slide.asset.altText || ""}
+                  />
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+    </div>
+    <div class="splide mt-4" id="thumbnail-slider">
+      <div class="splide__track">
+        <ul class="splide__list">
+          {
+            content.entries.map((slide) => {
+              return (
+                <li class="splide__slide rounded-sm">
+                  <img
+                    class="rounded-sm"
+                    src={urlFor(slide)
+                      .width(300)
+                      .height(225)
+                      .auto("format")
+                      .url()}
+                    width={300}
+                    height={225}
+                    alt={slide.asset.altText || ""}
+                  />
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
 </div>
 
-<style></style>
+<style is:global>
+  .track-mask {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 20%,
+      black 80%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 20%,
+      black 80%,
+      transparent
+    );
+  }
+</style>
+
+<script>
+  import Splide from "@splidejs/splide";
+  import "@splidejs/splide/css";
+
+  const slider = new Splide("#main-slider", {
+    type: "loop",
+    gap: "2rem",
+    padding: "15%",
+  });
+
+  const thumbnailSlider = new Splide("#thumbnail-slider", {
+    rewind: true,
+    isNavigation: true,
+    gap: "0.5rem",
+    focus: "center",
+    pagination: false,
+    fixedWidth: 100,
+  });
+
+  slider.sync(thumbnailSlider);
+  slider.mount();
+  thumbnailSlider.mount();
+</script>

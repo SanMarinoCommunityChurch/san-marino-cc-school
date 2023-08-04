@@ -5,17 +5,26 @@ const { content } = Astro.props;
 function isOdd(num) {
   return num % 2;
 }
+
+let showHeadingSection = false;
+if (content.heading) {
+  showHeadingSection = true;
+} else if (content.text) {
+  showHeadingSection = true;
+}
 ---
 
 <div>
-  <div class="center-items mb-12">
-    {content.heading && <h2 class="text-4xl mb-6">{content.heading}</h2>}
-    {
-      content.text && (
-        <p class="text-2xl leading-normal max-w-3xl">{content.text}</p>
-      )
-    }
-  </div>
+  {
+    showHeadingSection && (
+      <div class="center-items mb-12">
+        {content.heading && <h2 class="text-4xl mb-6">{content.heading}</h2>}
+        {content.text && (
+          <p class="text-2xl leading-normal max-w-3xl">{content.text}</p>
+        )}
+      </div>
+    )
+  }
   <div class="features flow gap-12">
     {
       content.entries.map((entry, index) => {

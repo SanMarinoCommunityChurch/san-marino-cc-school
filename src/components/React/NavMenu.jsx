@@ -1,6 +1,6 @@
 import { Menu, Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import constructHref from "../../utils/constructHref"
+import constructHref from "../../utils/constructHref";
 import clsx from "clsx";
 
 export default function NavMenu({ title, entries }) {
@@ -16,7 +16,9 @@ export default function NavMenu({ title, entries }) {
             )}
           >
             {title}
-            <span className={clsx('transition-transform', open && 'rotate-180')}>
+            <span
+              className={clsx("transition-transform", open && "rotate-180")}
+            >
               <i className="fa-solid fa-chevron-down transition-transform fa-xs text-brand-light"></i>
             </span>
           </Menu.Button>
@@ -34,17 +36,18 @@ export default function NavMenu({ title, entries }) {
             >
               {entries.map((entry, index) => {
                 return (
-                <Menu.Item key={index} as={Fragment}>
-                  {({ active }) => (
-                    <a
-                      href={constructHref(entry.link)}
-                      className="hover:text-brand-dark hover:bg-brand-light/10 inline-block w-full rounded-sm p-2 text-base leading-tight"
-                    >
-                      {entry.linkName || entry.link.pageName}
-                    </a>
-                  )}
-                </Menu.Item>
-              )})}
+                  <Menu.Item key={index} as={Fragment}>
+                    {({ active }) => (
+                      <a
+                        href={constructHref(entry.link)}
+                        className="hover:text-brand-dark hover:bg-brand-light/10 inline-block w-full rounded-md p-2 text-base leading-tight"
+                      >
+                        {entry.linkName || entry.link.pageName}
+                      </a>
+                    )}
+                  </Menu.Item>
+                );
+              })}
             </Menu.Items>
           </Transition>
         </>

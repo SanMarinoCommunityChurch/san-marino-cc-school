@@ -77,6 +77,7 @@ export default {
       type: 'text',
       description:
         'The text that displays in the page header area and serves to give a brief overview and introduction to the page.',
+      validation: (Rule) => Rule.max(200).error('Keep this text under 200 characters'),
       group: 'content',
     },
     // {

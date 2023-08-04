@@ -2,18 +2,27 @@
 import Accordion from "./React/Accordion";
 import { PortableText } from "astro-portabletext";
 const { content } = Astro.props;
+
+let showHeadingSection = false;
+if (content.heading) {
+  showHeadingSection = true;
+} else if (content.text) {
+  showHeadingSection = true;
+}
 ---
 
 <div>
-  <div class="center-items mb-12">
-    {content.heading && <h2 class="text-4xl mb-6">{content.heading}</h2>}
-    {
-      content.text && (
-        <p class="text-2xl leading-normal max-w-3xl">{content.text}</p>
-      )
-    }
-  </div>
-  <div class="faq flex flex-col gap-6">
+  {
+    showHeadingSection && (
+      <div class="center-items mb-12">
+        {content.heading && <h2 class="text-4xl mb-6">{content.heading}</h2>}
+        {content.text && (
+          <p class="text-2xl leading-normal max-w-3xl">{content.text}</p>
+        )}
+      </div>
+    )
+  }
+  <div class="faq | flex flex-col gap-8">
     {
       content.entries.map((item) => (
         <Accordion client:load question={item.question}>

@@ -16,6 +16,8 @@ export default {
       title: 'Description',
       description: 'Optional description of page content.',
       type: 'text',
+      validation: (Rule) =>
+        Rule.max(200).warning('It is best to keep this text under 200 characters.'),
     },
     {
       name: 'image',

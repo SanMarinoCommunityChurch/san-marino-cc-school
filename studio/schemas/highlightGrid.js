@@ -8,12 +8,16 @@ export default {
       title: 'Section Heading',
       description: 'Optional heading for the grid section.',
       type: 'string',
+      validation: (Rule) =>
+        Rule.max(60).warning('It is best to keep this text under 60 characters.'),
     },
     {
       name: 'text',
       title: 'Section Text',
       description: 'Optional text for the grid section.',
       type: 'text',
+      validation: (Rule) =>
+        Rule.max(200).warning('It is best to keep this text under 200 characters.'),
     },
     {
       name: 'items',
