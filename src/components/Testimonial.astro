@@ -1,0 +1,14 @@
+---
+import { PortableText } from "astro-portabletext";
+const { content } = Astro.props;
+// console.log(content.content[0].children[0].text);
+
+const firstParagraph = content.content[0].children[0].text;
+const splitLines = firstParagraph.split('.');
+---
+
+<div class="p-8 shadow-lg rounded-lg flex flex-col gap-6 border-b-8 border-brand-dark">
+    <p class="text-xl font-heading">{`${splitLines[0]}.`}</p>
+    <p class="text-base">{splitLines[1]}</p>
+    <div class="">— {content.attribution}</div>
+</div>

@@ -1,0 +1,20 @@
+---
+import SectionPage from "../../layouts/SectionPage.astro"
+
+const seo = {
+    title: 'Contact Success',
+    description: 'Thanks for reaching out! We will be in contact with you shortly.',
+    ogTitle: undefined,
+    ogDescription: undefined,
+    ogImage: undefined
+}
+---
+
+<SectionPage pageName='Contact' seo={seo}>
+    <article class="flow | gap-32 my-24 text-center">
+        <div>
+            <h2 class="text-3xl mb-6">Submission received!</h2>
+            <p>Thanks for reaching out! We will be in contact with you shortly.</p>
+        </div>
+    </article>
+</SectionPage>

@@ -8,6 +8,7 @@ import HighlightsGrid from "@components/HighlightsGrid.astro";
 import DateList from "@components/DateList.astro";
 import CTA from "@components/CTA.astro";
 import FAQSection from "@components/FAQSection.astro";
+import Form from "@components/Form.astro";
 import { pages } from "@lib/pages";
 
 export async function getStaticPaths() {
@@ -72,8 +73,20 @@ const { page } = Astro.props;
           );
         })
       ) : (
-        <div>No content added yet!</div>
+        <></>
       )
     }
+    {page._id === '187a63f3-9875-438a-a736-20f46f74a4f0' &&
+      <div class="content-wrapper w-full">
+        <Form formData={{
+          id: 'mainContactForm',
+          formName: 'mainContactForm',
+          title: 'Contact Us',
+          description: 'Reach out with your questions and inquiries.',
+          formType: 'general',
+          messageText: 'Let us know if you have any questions or comments.'
+        }} />
+      </div>
+  }
   </div>
 </SectionPage>

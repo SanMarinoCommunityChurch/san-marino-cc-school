@@ -1,0 +1,212 @@
+---
+import Button from "./Button.astro";
+const { formData } = Astro.props;
+---
+
+<form
+  class="form flex flex-col gap-8 relative rounded-lg p-8 shadow-lg max-w-3xl border border-brand-light/20 mx-auto"
+  name={formData.formName}
+  method="POST"
+  data-netlify="true"
+  action="/contact/success"
+>
+  <div class="flex flex-col gap-3">
+    <h2 class="text-3xl">{formData.title}</h2>
+    <p>{formData.description}</p>
+  </div>
+  <div class="flex flex-col gap-6">
+    <div class="form-item split">
+      <div>
+        <label for={`${formData.id}_firstName`}>Your name</label>
+        <input
+          id={`${formData.id}_firstName`}
+          name="firstName"
+          type="text"
+          placeholder="First name"
+          autocomplete="given-name"
+          required
+        />
+      </div>
+      <div>
+        <label for={`${formData.id}_lastName`} class="sr-only">Last name</label>
+        <input
+          id={`${formData.id}_lastName`}
+          name="lastName"
+          type="text"
+          placeholder="Last name"
+          autocomplete="family-name"
+          required
+        />
+      </div>
+    </div>
+    <div class="form-item">
+      <label for={`${formData.id}_email`}>Email address</label>
+      <input
+        id={`${formData.id}_email`}
+        name="email"
+        type="email"
+        placeholder="email@example.com"
+        autocomplete="email"
+        required
+      />
+    </div>
+    <div class="form-item">
+      <label for={`${formData.id}_phone`}>Phone number</label>
+      <input
+        id={`${formData.id}_phone`}
+        name="phone"
+        type="tel"
+        placeholder="Your phone"
+        required
+        autocomplete="tel"
+      />
+    </div>
+    {
+      formData.formType == "general" || formData.formType == "prayer" ? (
+        <div class="form-item">
+          <label for={`${formData.id}_text`}>{formData.messageText}</label>
+          <textarea
+            id={`${formData.id}_text`}
+            name="message"
+            rows="5"
+            placeholder="Your message"
+          />
+        </div>
+      ) : (
+        <>
+          <div class="form-item">
+            <label for={`${formData.id}_text`}>{formData.messageText}</label>
+            <textarea
+              id={`${formData.id}_text`}
+              name="message"
+              rows="5"
+              placeholder="Your message"
+              required
+            />
+          </div>
+          <div class="form-item">
+            <label for={`${formData.id}_contact`}>
+              Best way to contact you:
+            </label>
+            <select
+              id={`${formData.id}_contact`}
+              name="contactPreference"
+              required
+            >
+              <option value="">Choose an option:</option>
+              <option value="phone">Phone Call</option>
+              <option value="text">Text Message</option>
+              <option value="email">Email</option>
+            </select>
+          </div>
+          <div class="form-item">
+            <label for={`${formData.id}_previousCounseling`}>
+              Have you been in counseling before?
+            </label>
+            <select
+              id={`${formData.id}_previousCounseling`}
+              name="previousCounseling"
+              required
+            >
+              <option value="">Choose an option:</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+        </>
+      )
+    }
+    <div>
+      <input type="submit" />
+    </div>
+  </div>
+</form>
+
+<style>
+    .form-item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-item.split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .form-item.split > div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        justify-content: flex-end;
+    }
+
+    label {
+        font-size: theme('fontSize.sm');
+        font-weight: 700;
+        color: theme('colors.brand.dark');
+    }
+
+    .form-item:has(input[required] label::after) {
+        content: '*';
+        position: relative;
+        top: -5px;
+        left: 5px;
+        color: red;
+        font-size: theme('fontSize.sm');
+    }
+
+    .form-item:has(textarea[required] label::after) {
+        content: '*';
+        position: relative;
+        top: -5px;
+        left: 5px;
+        color: red;
+        font-size: theme('fontSize.sm');
+    }
+
+    .form-item:has(select[required] label::after) {
+        content: '*';
+        position: relative;
+        top: -5px;
+        left: 5px;
+        color: red;
+        font-size: theme('fontSize.sm');
+    }
+
+    input, textarea, select {
+        padding: 0.5rem 1rem;
+        font-variant-numeric: lining-nums;
+        font-size: theme('fontSize.base');
+        line-height: 1.5;
+        border: 1px solid theme('colors.gray.300');
+        border-radius: 0.5rem;
+    }
+
+    input:focus-visible, textarea:focus-visible, select:focus-visible {
+        outline: theme('colors.brand.DEFAULT') auto 1px;
+    }
+
+    input[type="submit"] {
+        background-color: theme('colors.brand.dark');
+        color: white;
+        border: 0;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+    }
+
+    input[type='submit']:hover {
+        background-color: theme('colors.brand.DEFAULT');
+    }
+
+    @media (max-width: 640px) {
+        .form-item.split {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+    }
+</style>
