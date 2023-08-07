@@ -53,16 +53,14 @@ export const homePage = await getSanityData(`*[_type == 'home'][0]{
       asset->
     }
   },
-  "meta": {
-    seoTitle,
-    seoDescription,
-    openGraph{
-      title,
-      description,
-      "image": image{
-        ...,
-        asset->
-      }
+  "seo": {
+    "title": seoTitle,
+    "description": seoDescription,
+    "ogTitle": openGraph.title,
+    "ogDescription": openGraph.description,
+    "ogImage": openGraph.image{
+      ...,
+      asset->
     }
   }
 }`);
@@ -176,7 +174,7 @@ export const pages = await getSanityData(`*[_type == 'page']{
       "type": _type,
       heading,
       text,
-      entries[]{
+      entries[]|order(date asc){
         heading,
         date,
         text,
@@ -204,16 +202,14 @@ export const pages = await getSanityData(`*[_type == 'page']{
       }
     }
   },
-  "meta": {
-    seoTitle,
-    seoDescription,
-    openGraph{
-      title,
-      description,
-      "image": image{
-        ...,
-        asset->
-      }
+  "seo": {
+    "title": seoTitle,
+    "description": seoDescription,
+    "ogTitle": openGraph.title,
+    "ogDescription": openGraph.description,
+    "ogImage": openGraph.image{
+      ...,
+      asset->
     }
   }
 }`);

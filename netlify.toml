@@ -1,0 +1,75 @@
+[[redirects]]
+  from = "/preschool-parents-portal"
+  to = "/"
+
+[[redirects]]
+  from = "/preschool-donation-form"
+  to = "/donate"
+
+[[redirects]]
+  from = "/preschool-history"
+  to = "/about/mission-and-accreditation"
+
+[[redirects]]
+  from = "/preschool-our-approach"
+  to = "/programs/our-approach"
+
+[[redirects]]
+  from = "/preschool-staff-bios"
+  to = "/about/our-staff"
+
+[[redirects]]
+  from = "/preschool-early-extended-care"
+  to = "/programs/extended-care"
+
+[[redirects]]
+  from = "/preschool-application-process"
+  to = "/enrollment/how-to-enroll"
+
+[[redirects]]
+  from = "/preschool-tuition"
+  to = "/enrollment/tuition"
+
+[[redirects]]
+  from = "/preschool-calendar-of-events"
+  to = "/community/calendar"
+
+[[redirects]]
+  from = "/preschool-employment"
+  to = "/about/employment"
+
+[[redirects]]
+  from = "/preschool-contact-us"
+  to = "/contact"
+
+[[redirects]]
+  from = "/preschool-parent-testimonials"
+  to = "/community/testimonials"
+
+[[redirects]]
+  from = "/preschool-send-referrals"
+  to = "/enrollment/faq"
+
+[[redirects]]
+  from = "/preschool-mission-statement"
+  to = "/about/mission-and-accreditation"
+
+[[redirects]]
+  from = "/preschool-schedule-a-tour"
+  to = "/enrollment/faq"
+
+[[redirects]]
+  from = "/preschool-snack-time"
+  to = "/programs/extracurriculars"
+
+[[redirects]]
+  from = "/preschool-outdoor-time"
+  to = "/programs/extracurriculars"
+
+[[redirects]]
+  from = "/preschool-yoga"
+  to = "/programs/extracurriculars"
+
+[[redirects]]
+  from = "/preschool-view-our-gallery"
+  to = "/community/gallery"

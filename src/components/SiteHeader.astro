@@ -1,9 +1,12 @@
 ---
 import Button from "./Button.astro";
 import NavMenu from "@components/React/NavMenu.jsx";
+import { siteSettings } from "@lib/siteSettings";
 import constructHref from "../utils/constructHref";
 
 const { mainNavigation } = Astro.props;
+
+const { siteHeader } = siteSettings;
 ---
 
 <header
@@ -37,8 +40,8 @@ const { mainNavigation } = Astro.props;
     </nav>
   </div>
   <div class="flex gap-6 items-center">
-    <Button href="#" style="rainbow">
-      <span class="rainbow-btn-text font-bold">Parent Handbook</span>
+    <Button href={siteHeader.href} style="rainbow">
+      <span class="rainbow-btn-text font-bold">{siteHeader.name}</span>
     </Button>
   </div>
 </header>

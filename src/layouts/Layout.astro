@@ -3,18 +3,22 @@ import { SEO } from "astro-seo";
 import { Image } from "@astrojs/image/components";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import { urlFor } from "@lib/sanity";
 import "../styles/global.css";
 import { navigation, getNavigation } from "@lib/navigation";
+import { siteSettings } from "@lib/siteSettings";
 
 const mainNavigation = getNavigation("79fe02eb-35a4-40bd-ae80-15ef86d6245f");
 
-const siteMeta = {
-  title: "San Marino Community Church Nursery School",
-  description:
-    "SMCCNS is a community of children, families, and teachers committed to learning and growing through a process of research and discovery.",
-};
+// const siteMeta = {
+//   title: "San Marino Community Church Nursery School",
+//   description:
+//     "SMCCNS is a community of children, families, and teachers committed to learning and growing through a process of research and discovery.",
+// };
+const { siteName, siteDescription, defaultOgImage } = siteSettings;
 
-const { meta = siteMeta } = Astro.props;
+const { meta } = Astro.props;
+const { title, description, ogTitle, ogImage, ogImageExternal, ogDescription } = meta;
 ---
 
 <!DOCTYPE html>
@@ -22,21 +26,19 @@ const { meta = siteMeta } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/smcc-school-favicon.png" />
     <SEO
-      title={meta.title}
-      description={meta.description}
+      title={title ? `${title} | ${siteName}` : siteName}
+      description={description || siteDescription}
       openGraph={{
         basic: {
-          title: meta.openGraph ? meta.openGraph.title : meta.title,
-          type: "website",
-          image: "/SMCC-NurserySchool_080.jpg",
+          title: ogTitle,
+          type: 'website',
+          image: ogImageExternal ? ogImageExternal : ogImage ? urlFor(ogImage).width(1200).height(630).auto('format').url() : urlFor(defaultOgImage).width(1200).height(630).fit('crop').crop('center').auto('format').url()
         },
         optional: {
-          description: meta.openGraph
-            ? meta.openGraph.description
-            : meta.description,
-        },
+          description: ogDescription || siteDescription
+        }
       }}
     />
     <script defer src="/fontawesome/solid.min.js"></script>

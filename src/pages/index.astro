@@ -39,10 +39,16 @@ import constructHref from "../utils/constructHref";
 //     },
 //   },
 // ];
-const { hero, intro, presentation, cta, meta } = homePage;
+const { hero, intro, presentation, cta, seo } = homePage;
 ---
 
-<Layout>
+<Layout meta={{
+  title: seo.title || undefined,
+  description: seo.description || undefined,
+  ogTitle: seo.ogTitle || seo.title || undefined,
+  ogDescription: seo.ogDescription || seo.description || undefined,
+  ogImage: seo.ogImage || undefined
+}}>
   <main slot="main">
     <article
       class="relative max-h-[90vh] overflow-hidden flex flex-col justify-center items-start"

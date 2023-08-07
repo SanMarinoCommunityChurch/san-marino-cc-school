@@ -7,7 +7,7 @@ export default {
       name: 'name',
       title: 'Section Name',
       type: 'string',
-      validation: Rule => Rule.required()
+      validation: (Rule) => Rule.required().max(50),
     },
     {
       name: 'pages',

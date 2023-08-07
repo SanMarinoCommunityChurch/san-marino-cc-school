@@ -1,10 +1,16 @@
 ---
 import Layout from "./Layout.astro";
 
-const { meta, pageName, headerText } = Astro.props;
+const { seo, pageName, headerText } = Astro.props;
 ---
 
-<Layout meta={meta}>
+<Layout meta={{
+  title: seo.title || pageName,
+  description: seo.description || headerText || undefined,
+  ogTitle: seo.ogTitle || seo.title || pageName,
+  ogDescription: seo.ogDescription || seo.description || headerText || undefined,
+  ogImage: seo.ogImage || undefined
+}}>
   <main slot="main">
     <section class="hero pt-32 pb-24 bg-brand-light/20">
       <div class="content-wrapper">
