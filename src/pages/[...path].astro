@@ -9,6 +9,10 @@ import DateList from "@components/DateList.astro";
 import CTA from "@components/CTA.astro";
 import FAQSection from "@components/FAQSection.astro";
 import Form from "@components/Form.astro";
+import Testimonial from "@components/Testimonial.astro";
+import PostPreview from "@components/PostPreview.astro";
+import { testimonials } from "@lib/testimonials";
+import { posts } from "@lib/posts";
 import { pages } from "@lib/pages";
 
 export async function getStaticPaths() {
@@ -87,6 +91,28 @@ const { page } = Astro.props;
           messageText: 'Let us know if you have any questions or comments.'
         }} />
       </div>
-  }
+    }
+    {page._id === 'eea13d84-fc4b-4b50-8e39-45d0553cfdd6' &&
+      <article class="content-wrapper">
+        <div class="grid grid-cols-2 gap-x-8 gap-y-16">
+          {testimonials.map((testimonial, index) => {
+            return (
+              <Testimonial content={testimonial} theme={index % 3 === 0 ? 'brand' : index % 3 === 1 ? 'accent-red' : 'accent-yellow'} portableText />
+            )
+          })}
+        </div>
+      </article>
+    }
+    {page._id === '1b98f686-d049-4e0d-be78-39b327d36c8e' &&
+      <div class="content-wrapper w-full">
+        <div class="grid grid-cols-3 gap-6">
+          {posts.map((post) => {
+            return (
+              <PostPreview content={post} href={`/community/updates/${post.slug}`} />
+            )
+          })}
+        </div>
+      </div>
+    }
   </div>
 </SectionPage>

@@ -13,6 +13,8 @@ export const posts = await getSanityData(`*[_type == 'post']|order(publishDate d
       ...,
       asset->
     },
+    event,
+    eventDetails,
     "portableText": content.content[]{
         ...,
         markDefs[]{
@@ -55,7 +57,17 @@ export const posts = await getSanityData(`*[_type == 'post']|order(publishDate d
     "linkItem": link{
         ${groqLinkType}
     }
+  },
+  "seo": {
+    "title": seoTitle,
+    "description": seoDescription,
+    "ogTitle": openGraph.title,
+    "ogDescription": openGraph.description,
+    "ogImage": openGraph.image{
+      ...,
+      asset->
     }
+  }
 }`)
 
 export const categories = await getSanityData(`*[_type == 'postType']{

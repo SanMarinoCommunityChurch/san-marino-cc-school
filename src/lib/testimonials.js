@@ -1,3 +1,7 @@
 import { getSanityData } from "./sanity";
 
-export const testimonials = await getSanityData(`*[_type == 'testimonial']|order(title asc)`)
+export const testimonials = await getSanityData(`*[_type == 'testimonial']|order(title asc){
+    attribution,
+    content[],
+    preview
+}`)

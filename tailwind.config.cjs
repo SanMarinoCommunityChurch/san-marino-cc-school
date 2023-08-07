@@ -18,6 +18,7 @@ module.exports = {
       accent: {
         red: "#F35B56",
         yellow: "#FFDE59",
+        "yellow-dark": "#c89607"
       },
       // neutral: {
       //   light: colors.gray.400, //#5B666C

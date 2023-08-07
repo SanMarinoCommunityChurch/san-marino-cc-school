@@ -6,8 +6,10 @@ import HighlightsGrid from "@components/HighlightsGrid.astro";
 import CTA from "@components/CTA.astro";
 import Testimonial from "@components/Testimonial.astro";
 import HomeFeatures from "@components/React/HomeFeatures.jsx";
+import PostPreview from "@components/PostPreview.astro";
 import { homePage } from "@lib/pages";
 import { testimonials } from "@lib/testimonials";
+import { posts } from "@lib/posts"
 import { urlFor } from "@lib/sanity";
 import constructHref from "../utils/constructHref";
 
@@ -42,6 +44,7 @@ import constructHref from "../utils/constructHref";
 //   },
 // ];
 const featuredTestimonials = testimonials.slice(0,3)
+const featuredPosts = posts.slice(0,3);
 const { hero, intro, presentation, cta, seo } = homePage;
 ---
 
@@ -111,14 +114,25 @@ const { hero, intro, presentation, cta, seo } = homePage;
     <div class="content-wrapper py-24">
       <h2 class="text-3xl text-center mb-8">Parent Testimonials</h2>
       <div class="grid grid-cols-3 gap-8">
-        {featuredTestimonials.map((testimonial) => {
+        {featuredTestimonials.map((testimonial, index) => {
           return (
-            <Testimonial content={testimonial} />
+            <Testimonial content={testimonial} theme={index == 0 ? 'brand' : index == 1 ? 'accent-red' : 'accent-yellow'} />
           )
         })}
       </div>
+      <div class="center-items mt-12"><Button href="/community/testimonials">See More Testimonials</Button></div>
     </div>
     <CTA content={cta} />
+    <div class="content-wrapper py-24">
+      <h2 class="text-3xl mb-12">Recent Updates</h2>
+      <div class="grid grid-cols-3 gap-6">
+          {featuredPosts.map((post) => {
+            return (
+              <PostPreview content={post} href={`/community/updates/${post.slug}`} />
+            )
+          })}
+        </div>
+    </div>
   </main>
 </Layout>
 

@@ -1,11 +1,8 @@
 ---
 import { DateTime } from "luxon"
+import formatFromISO from "../utils/formatFromISO";
 
 const { content } = Astro.props;
-
-function formatFromISO(date, luxonFormat) {
-    return DateTime.fromISO(date).setZone('America/Los_Angeles', { keepLocalTime: true }).toLocaleString(DateTime[luxonFormat])
-}
 
 function assembleDateRange(firstDate, secondDate) {
     const start = DateTime.fromISO(firstDate).setZone('America/Los_Angeles');

@@ -65,6 +65,14 @@ export default {
       },
     },
     {
+      name: 'customContent',
+      title: 'Custom Content?',
+      type: 'boolean',
+      initialValue: false,
+      readOnly: true,
+      group: 'info',
+    },
+    {
       name: 'layout',
       title: 'Layout',
       type: 'string',
@@ -122,6 +130,7 @@ export default {
         },
       ],
       group: 'content',
+      hidden: ({document}) => document?.customContent == true,
     },
     {
       name: 'seoTitle',

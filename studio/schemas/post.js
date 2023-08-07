@@ -27,7 +27,7 @@ export default {
     },
     {
       name: 'publishDate',
-      title: 'Publish Date',
+      title: 'Post Publish Date',
       validation: (Rule) => Rule.required().error('Required field.'),
       type: 'date',
       group: 'content',
@@ -51,6 +51,41 @@ export default {
         accept: 'image/*',
       },
       group: 'content',
+    },
+    {
+      name: 'event',
+      title: 'Add Event Details?',
+      description: 'Select true to add event details to this post.',
+      type: 'boolean',
+      group: 'content',
+      initialValue: false,
+    },
+    {
+      name: 'eventDetails',
+      title: 'Event Details',
+      type: 'object',
+      group: 'content',
+      fields: [
+        {
+          name: 'date',
+          title: 'Event Start Date & Time',
+          type: 'datetime',
+          validation: (Rule) => Rule.required(),
+        },
+        {
+          name: 'endDate',
+          title: 'Event End Date & Time',
+          description: 'Optional.',
+          type: 'datetime',
+        },
+        {
+          name: 'location',
+          title: 'Event Location',
+          description: 'Optional.',
+          type: 'string',
+        },
+      ],
+      hidden: ({document}) => document?.event == false,
     },
     {
       name: 'preview',

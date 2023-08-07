@@ -1,0 +1,22 @@
+---
+import { urlFor } from "@lib/sanity";
+import { DateTime } from "luxon"
+import formatFromISO from "../utils/formatFromISO";
+const { content, href } = Astro.props;
+
+const formattedDate = formatFromISO(content.publishDate, 'DATE_FULL');
+---
+
+<article>
+    <a href={href} class="rounded-md shadow-md relative flex flex-col gap-4 max-w-lg overflow-hidden group">
+        <div class="absolute top-3 right-3 bg-brand-dark text-white text-base px-2 py-1 rounded-sm leading-[1.15] z-10">{content.category.name}</div>
+        <div class="">
+            <img class="transition-transform duration-300 group-hover:scale-105" src={urlFor(content.image).width(900).height(600).auto('format').url()} width={900} height={600} alt={content.image.asset.altText || ""}>
+        </div>
+        <div class="px-6 pb-6 pt-2">
+            <time class="relative text-sm" datetime={content.publishDate}>{`Posted on ${formattedDate}`}</time>
+            <h3 class="text-xl leading-[1.3] mt-1 group-hover:underline">{content.name}</h3>
+            <p class="mt-5">{content.preview}</p>
+        </div>
+    </a>
+</article>

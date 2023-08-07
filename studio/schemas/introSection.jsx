@@ -21,29 +21,6 @@ export default {
       validation: (Rule) => Rule.max(300).error('Keep this text under 300 characters.'),
     },
     {
-      name: 'text',
-      title: 'Text and Media Block Text',
-      description: 'Supports bold, italics, and link text.',
-      type: 'array',
-      of: [
-        {
-          type: 'block',
-          styles: [
-            {
-              title: 'Normal',
-              value: 'normal',
-            },
-          ],
-          marks: {
-            decorators: [
-              {title: 'Bold', value: 'strong'},
-              {title: 'Italic', value: 'em'},
-            ],
-          },
-        },
-      ],
-    },
-    {
       name: 'mediaType',
       title: 'Media Type',
       type: 'string',

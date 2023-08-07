@@ -1,0 +1,38 @@
+---
+import SectionPage from "../../../layouts/SectionPage.astro";
+import RichContent from "../../../components/RichContent.astro";
+import formatFromISO from "../../../utils/formatFromISO"
+import { urlFor } from "../../../lib/sanity"
+import CTA from "../../../components/CTA.astro";
+import { posts } from "../../../lib/posts"
+
+export async function getStaticPaths() {
+    const allPosts = posts;
+    return allPosts.map((post) => {
+        return {
+            params: {
+                slug: post.slug
+            },
+            props: { post }
+        }
+    })
+}
+
+const { slug } = Astro.params;
+const { post } = Astro.props;
+console.log(post)
+---
+
+<SectionPage pageName={post.name} headerText={post.preview} seo={post.seo}>
+    <article class="content-wrapper flow | gap-12 my-24">
+            <img class="max-w-3xl mx-auto rounded-lg" src={urlFor(post.image)?.width(900).url()} width={900} alt={post.image.asset.altText || ""}>
+            {post.event && 
+                <div class="bg-brand-dark text-white rounded-md p-6 max-w-3xl w-full mx-auto flex flex-col gap-3">
+                    <div class="font-heading text-xl">Event Details</div>
+                    <time datetime={post.eventDetails.date}><span class="font-bold">Time: </span><span>{formatFromISO(post.eventDetails.date, 'DATETIME_FULL')}</span></time>
+                    <div><span class="font-bold">Location: </span><span>{post.eventDetails.location}</span></div>
+                </div>
+            }
+            <RichContent content={post.portableText} />
+    </article>
+</SectionPage>

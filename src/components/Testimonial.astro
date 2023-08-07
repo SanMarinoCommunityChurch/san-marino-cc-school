@@ -1,14 +1,41 @@
 ---
 import { PortableText } from "astro-portabletext";
-const { content } = Astro.props;
-// console.log(content.content[0].children[0].text);
 
-const firstParagraph = content.content[0].children[0].text;
-const splitLines = firstParagraph.split('.');
+const themes = {
+    brand: {
+        text: 'text-brand',
+        border: 'border-brand'
+    },
+    "accent-red": {
+        text: 'text-accent-red',
+        border: 'border-accent-red'
+    },
+    "accent-yellow": {
+        text: 'text-accent-yellow',
+        border: 'border-accent-yellow'
+    },
+}
+
+const { content, theme = 'brand', portableText } = Astro.props;
+const portableTextChildren = portableText ? content.content[0].children : undefined;
 ---
 
-<div class="p-8 shadow-lg rounded-lg flex flex-col gap-6 border-b-8 border-brand-dark">
-    <p class="text-xl font-heading">{`${splitLines[0]}.`}</p>
-    <p class="text-base">{splitLines[1]}</p>
+<div class:list={["relative p-8 shadow-lg rounded-lg self-start flex flex-col gap-6 border-b-8", themes[theme].border, portableText && 'portable-text']}>
+    <div class:list={["absolute font-heading font-bold text-[6rem] leading-none -left-6 top-6", themes[theme].text]}>“</div>
+    {portableText ? 
+        <>
+            <PortableText value={content.content} />
+        </>
+        :
+        <p class="text-xl leading-[1.4] font-heading">{content.preview}</p>
+    }
     <div class="">— {content.attribution}</div>
 </div>
+
+<style>
+    .portable-text > p:first-of-type {
+        font-size: theme('fontSize.xl');
+        line-height: 1.4;
+        font-family: Mali;
+    }
+</style>

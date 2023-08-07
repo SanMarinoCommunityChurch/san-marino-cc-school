@@ -12,7 +12,7 @@ if (content.accent === "brand-light") {
 } else if (content.accent === "accent-red") {
   overlayColor = "bg-accent-red/90";
 } else if (content.accent === "accent-yellow") {
-  overlayColor = "bg-accent-yellow/90";
+  overlayColor = "bg-accent-yellow-dark/90";
 }
 ---
 
@@ -24,7 +24,7 @@ if (content.accent === "brand-light") {
     {content.text && <p class="text-xl leading-[1.4] text-white max-w-4xl">{content.text}</p>}
     {
       content.linkItem && (
-        <Button href={constructHref(content.linkItem.link)}>
+        <Button href={constructHref(content.linkItem.link)} style="white">
           {content.linkItem.linkName || content.linkItem.link.pageName}
         </Button>
       )
