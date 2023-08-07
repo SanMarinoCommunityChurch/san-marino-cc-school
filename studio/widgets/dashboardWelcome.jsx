@@ -19,6 +19,12 @@ function DashboardWelcome() {
             School website. This is where you will add and edit all content and assets for your
             site.
           </Text>
+          <Text>
+            Visit your siate at{' '}
+            <a href="https://smccnurseryschool.com" target="_blank">
+              smccnurseryschool.com
+            </a>
+          </Text>
           <Grid columns={3} gap={4}>
             <Card padding={4} border>
               <Stack space={4}>
