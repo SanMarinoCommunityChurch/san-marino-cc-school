@@ -115,6 +115,9 @@ export default {
           type: 'richContent',
         },
         {
+          type: 'dateList',
+        },
+        {
           type: 'cta',
         },
       ],
@@ -128,6 +131,8 @@ export default {
       type: 'string',
       // initialValue: ({document}) => document?.name,
       group: 'seo',
+      validation: (Rule) =>
+        Rule.max(100).warning('It is best to keep this text under 100 characters.'),
     },
     {
       name: 'seoDescription',
@@ -135,7 +140,7 @@ export default {
       description:
         'Write a short description that will set the HTML document meta drescription and display as the page description in search engine results.',
       type: 'text',
-      validation: (Rule) => Rule.max(200),
+      validation: (Rule) => Rule.max(200).error('Keep this text under 200 characters.'),
       group: 'seo',
     },
     {

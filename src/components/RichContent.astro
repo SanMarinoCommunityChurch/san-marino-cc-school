@@ -1,12 +1,15 @@
 ---
-import InlineImage from "@components/InlineImage.astro";
-import InlineYoutubeEmbed from "@components/InlineYoutubeEmbed.astro";
+import InlineHeadingId from "./InlineHeadingId.astro";
+import InlineImage from "./InlineImage.astro";
+import InlineTable from "./InlineTable.astro";
+import InlineLink from "./InlineLink.astro";
+import InlineYoutubeEmbed from "./InlineYoutubeEmbed.astro";
 import { PortableText } from "astro-portabletext";
 const { content } = Astro.props;
 ---
 
 <article
-  class="prose max-w-3xl mx-auto prose-h2:text-3xl prose-p:text-gray-500 prose-p:leading-normal prose-p:text-lg prose-a:text-brand-dark prose-a:underline hover:prose-a:no-underline prose-img:rounded-md"
+  class="prose max-w-3xl mx-auto prose-h2:text-3xl prose-p:text-gray-500 prose-p:leading-normal prose-p:text-lg prose-ul:text-gray-500 prose-ul:leading-normal prose-ul:text-lg prose-ol:text-gray-500 prose-ol:leading-normal prose-ol:text-lg prose-thead:bg-brand-light/20 prose-thead:rounded-md prose-th:p-3 prose-td:p-3 prose-a:text-brand-dark prose-a:underline hover:prose-a:no-underline prose-img:rounded-md"
 >
   <PortableText
     value={content}
@@ -14,6 +17,15 @@ const { content } = Astro.props;
       type: {
         image: InlineImage,
         youtube: InlineYoutubeEmbed,
+        table: InlineTable,
+      },
+      block: {
+        h2: InlineHeadingId,
+        h3: InlineHeadingId,
+      },
+      mark: {
+        link: InlineLink,
+        internalLink: InlineLink,
       },
     }}
   />

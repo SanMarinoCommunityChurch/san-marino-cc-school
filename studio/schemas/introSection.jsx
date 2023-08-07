@@ -11,17 +11,19 @@ export default {
       title: 'Text and Media Block Heading',
       description: 'Optional heading text.',
       type: 'string',
-      validation: (Rule) =>
-        Rule.max(60).warning('It is best to keep this text under 60 characters.'),
+      validation: (Rule) => Rule.max(60).error('Keep this text under 60 characters.'),
+    },
+    {
+      name: 'previewText',
+      title: 'Text and Media Block Text',
+      description: 'Provide a short description to accompany the image or video.',
+      type: 'text',
+      validation: (Rule) => Rule.max(300).error('Keep this text under 300 characters.'),
     },
     {
       name: 'text',
       title: 'Text and Media Block Text',
       description: 'Supports bold, italics, and link text.',
-      validation: (Rule) => [
-        Rule.required(),
-        Rule.max(300).warning('It is best to keep this text under 300 characters.'),
-      ],
       type: 'array',
       of: [
         {

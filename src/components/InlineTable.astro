@@ -1,0 +1,48 @@
+---
+const props = Astro.props;
+const { node, ...attrs } = props;
+---
+
+<div>
+    <table class="">
+        {node.rows.filter((row) => row.header === true)[0] && 
+            <thead>
+                {node.rows.map((row) => 
+                    <>
+                        {row.header && 
+                            <tr>{row.entries.map((col) => 
+                                <>
+                                    {col.includes(':') ?
+                                        <>
+                                            <th class="text-base leading-normal">
+                                                {`${col.split(':')[0]}:`}
+                                                <br>
+                                                {col.split(':')[1]}
+                                            </th>
+                                        </>
+                                        :
+                                        <th class="text-base leading-normal">{col}</th>
+                                    }
+                                </>
+                            )}</tr>
+                        }
+                    </>
+                )}
+            </thead>
+        }
+        <tbody>
+            {node.rows.map((row) => {
+                return (
+                    <>
+                        {!row.header && 
+                            <tr>
+                                {row.entries.map((col) => <td class="text-base leading-normal">{col}</td>)}
+                            </tr>
+                        }
+                    </>
+                )
+            })}
+        </tbody>
+        {node.title && <caption>{node.title}</caption>}
+    </table>
+</div>

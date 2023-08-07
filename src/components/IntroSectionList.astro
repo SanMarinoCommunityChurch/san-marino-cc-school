@@ -20,12 +20,12 @@ if (content.heading) {
       <div class="center-items mb-12">
         {content.heading && <h2 class="text-4xl mb-6">{content.heading}</h2>}
         {content.text && (
-          <p class="text-2xl leading-normal max-w-3xl">{content.text}</p>
+          <p class="text-2xl leading-[1.4] max-w-3xl">{content.text}</p>
         )}
       </div>
     )
   }
-  <div class="features flow gap-12">
+  <div class="features flow gap-24">
     {
       content.entries.map((entry, index) => {
         return (

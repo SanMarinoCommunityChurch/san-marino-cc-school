@@ -1,3 +1,5 @@
+import {HiDocument} from 'react-icons/hi2'
+
 export default {
   name: 'richContent',
   title: 'Rich Content',
@@ -23,13 +25,43 @@ export default {
               {title: 'Bold', value: 'strong'},
               {title: 'Italic', value: 'em'},
             ],
+            annotations: [
+              {
+                name: 'link',
+                title: 'External Link',
+                type: 'object',
+                fields: [{name: 'url', type: 'url'}],
+              },
+              {
+                name: 'internalLink',
+                title: 'Internal Link',
+                type: 'object',
+                icon: HiDocument,
+                fields: [
+                  {
+                    name: 'reference',
+                    type: 'reference',
+                    options: {
+                      disableNew: true,
+                    },
+                    to: [{type: 'page'}],
+                  },
+                ],
+              },
+            ],
           },
         },
         {
           type: 'image',
+          options: {
+            hotspot: true,
+          },
         },
         {
           type: 'youtube',
+        },
+        {
+          type: 'table',
         },
       ],
     },

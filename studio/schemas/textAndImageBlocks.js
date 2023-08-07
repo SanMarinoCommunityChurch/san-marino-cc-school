@@ -1,6 +1,8 @@
 export default {
   name: 'introSections',
   title: 'Text and Media Blocks',
+  description:
+    'A short block of text set next to an image or video, suitable for introductory sections of content.',
   type: 'object',
   fields: [
     {
@@ -8,16 +10,14 @@ export default {
       title: 'Section Heading',
       description: 'Optional heading for the content feature section.',
       type: 'string',
-      validation: (Rule) =>
-        Rule.max(60).warning('It is best to keep this text under 60 characters.'),
+      validation: (Rule) => Rule.max(60).error('Keep this text under 60 characters.'),
     },
     {
       name: 'text',
       title: 'Section Text',
       description: 'Optional text for the content feature section.',
       type: 'text',
-      validation: (Rule) =>
-        Rule.max(200).warning('It is best to keep this text under 200 characters.'),
+      validation: (Rule) => Rule.max(200).error('Keep this text under 200 characters.'),
     },
     {
       name: 'introSections',

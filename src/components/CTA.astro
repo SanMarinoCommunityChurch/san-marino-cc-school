@@ -12,7 +12,7 @@ if (content.accent === "brand-light") {
 } else if (content.accent === "accent-red") {
   overlayColor = "bg-accent-red/90";
 } else if (content.accent === "accent-yellow") {
-  overlayColor = "bg-accent-yellow/20";
+  overlayColor = "bg-accent-yellow/90";
 }
 ---
 
@@ -21,7 +21,7 @@ if (content.accent === "brand-light") {
     class="content-wrapper | flow | py-28 gap-12 z-[2] text-center items-center"
   >
     <h2 class="text-5xl text-white">{content.heading}</h2>
-    {content.text && <p class="text-xl text-white max-w-4xl">{content.text}</p>}
+    {content.text && <p class="text-xl leading-[1.4] text-white max-w-4xl">{content.text}</p>}
     {
       content.linkItem && (
         <Button href={constructHref(content.linkItem.link)}>

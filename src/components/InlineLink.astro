@@ -1,0 +1,17 @@
+---
+import constructHref from "../utils/constructHref";
+
+const props = Astro.props;
+const { node, ...attrs } = props;
+const markTypeIs = (markType) => markType === node.markType;
+---
+
+{
+  markTypeIs("link") ? (
+    // prettier-ignore
+    <a href={node.markDef.url} target="_blank"><slot /></a>
+  ) : (
+    // prettier-ignore
+    <a href={constructHref(node.markDef.linkItem)}><slot /></a>
+  )
+}

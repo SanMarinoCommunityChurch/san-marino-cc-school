@@ -17,7 +17,8 @@ const { content, layout = "default" } = Astro.props;
       )
     }
     <div class="text-xl leading-relaxed flow">
-      <PortableText value={content.portableText} />
+      <p>{content.text}</p>
+      <!-- <PortableText value={content.portableText} /> -->
     </div>
   </div>
   {

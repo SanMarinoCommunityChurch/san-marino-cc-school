@@ -33,13 +33,15 @@ export default {
               name: 'heading',
               title: 'Grid Item Heading',
               type: 'string',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) =>
+                Rule.required().max(60).error('Keep this text under 60 characters.'),
             },
             {
               name: 'text',
               title: 'Grid Item Text',
               type: 'text',
-              validation: (Rule) => Rule.required().max(200),
+              validation: (Rule) =>
+                Rule.required().max(200).error('Keep this text under 200 characters.'),
             },
             {
               name: 'link',

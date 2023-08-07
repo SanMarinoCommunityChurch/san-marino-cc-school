@@ -83,17 +83,13 @@ export const pages = await getSanityData(`*[_type == 'page']{
       text,
       "entries": introSections[]{
         heading,
-        "portableText": text,
+        "text": previewText,
         mediaType,
-        mediaType == 'image' => {
-          "image": image{
-            ...,
-            asset->
-          }
+        "image": image{
+          ...,
+          asset->
         },
-        mediaType == 'video' => {
-          video
-        }
+        video,
       }
     },
     _type == 'contentFeatures' => {
@@ -137,13 +133,34 @@ export const pages = await getSanityData(`*[_type == 'page']{
       "type": _type,
       "portableText": content[]{
         ...,
+        markDefs[]{
+          ...,
+          _type == "internalLink" => {
+            "linkItem": {
+              "type": @.reference->_type,
+              "sectionSlug": @.reference->sectionSlug,
+              "href": @.reference->slug{
+                current,
+                "full": fullUrl
+              }
+            }
+          }
+        },
         _type == "image" => {
           ...,
           asset->
         },
         _type == 'youtube' => {
           ...,
-        }
+        },
+        _type == 'table' => {
+          "type": _type,
+          title,
+          rows[]{
+            header,
+            "entries": item[]
+          }
+        },
       }
     },
     _type == 'gallery' => {
@@ -153,6 +170,24 @@ export const pages = await getSanityData(`*[_type == 'page']{
       "entries": galleryItems[]{
         ...,
         asset->
+      }
+    },
+    _type == 'dateList' => {
+      "type": _type,
+      heading,
+      text,
+      entries[]{
+        heading,
+        date,
+        text,
+        parentAndFamily,
+        "linkItem": link{
+          ${groqLinkType}
+        },
+        range,
+        range == true => {
+          endDate
+        }
       }
     },
     _type == 'cta' => {

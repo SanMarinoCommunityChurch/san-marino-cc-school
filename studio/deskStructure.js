@@ -1,4 +1,13 @@
-import {HiCog, HiCube, HiDocument, HiHome, HiSquares2X2, HiTag, HiUsers} from 'react-icons/hi2'
+import {
+  HiCog,
+  HiCube,
+  HiBars3,
+  HiDocument,
+  HiHome,
+  HiSquares2X2,
+  HiTag,
+  HiUsers,
+} from 'react-icons/hi2'
 
 export const deskStructure = (S) =>
   S.list()
@@ -43,17 +52,20 @@ export const deskStructure = (S) =>
           S.list()
             .title('Pages')
             .items([
-              S.listItem()
-                .title('Home Page (Unique)')
-                .id('home')
-                .icon(HiHome)
-                .child(S.document().schemaType('home').documentId('home')),
+              S.listItem().title('Home Page (Unique)').icon('home').icon(HiHome).child(
+                // update to unique schema page
+                S.document().schemaType('home').documentId('a69ca42e-4a27-4bc1-aa42-9fec76edde27')
+              ),
               S.listItem()
                 .title('All Other Pages')
                 .icon(HiDocument)
                 .child(S.documentTypeList('page').title('All Pages')),
             ])
         ),
+      S.listItem()
+        .title('Site Navigation')
+        .icon(HiBars3)
+        .child(S.documentTypeList('navigation').title('Navigation')),
       S.divider(),
       S.listItem()
         .title('Global Site Settings')

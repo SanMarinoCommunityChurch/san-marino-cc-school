@@ -1,0 +1,47 @@
+---
+import { DateTime } from "luxon"
+
+const { content } = Astro.props;
+
+function formatFromISO(date, luxonFormat) {
+    return DateTime.fromISO(date).setZone('America/Los_Angeles', { keepLocalTime: true }).toLocaleString(DateTime[luxonFormat])
+}
+
+function assembleDateRange(firstDate, secondDate) {
+    const start = DateTime.fromISO(firstDate).setZone('America/Los_Angeles');
+    const end = DateTime.fromISO(secondDate).setZone('America/Los_Angeles');
+    if (start.c.year == end.c.year) {
+        return `${start.toFormat('cccc, LLLL d')} – ${end.toFormat('cccc, LLLL d, y')}`
+    } else {
+        return `${start.toFormat('cccc, LLLL d, y')} – ${end.toFormat('cccc, LLLL d, y')}`
+    }
+}
+
+const formattedDate = formatFromISO(content.date, 'DATE_HUGE');
+---
+
+<div class:list={["p-4 rounded-md relative", content.parentAndFamily && 'bg-brand-light/20']}>
+    {content.parentAndFamily && 
+    <div class="absolute top-2 right-2 text-base px-2 py-1 leading-[1.2] bg-brand-dark text-white rounded-[0.25rem] flex items-center gap-2">
+        <i class="fa-solid fa-family"></i>
+        <span>Parent and Family Event</span>
+    </div>
+    }
+    <time class="relative" datetime={content.date}>{content.range ? assembleDateRange(content.date, content.endDate) : formattedDate}</time>
+    <h3 class="text-2xl leading-[1.3] mt-2">{content.heading}</h3>
+</div>
+
+<style>
+    time::before {
+        content: '';
+        position: absolute;
+        width: 0.75rem;
+        height: 0.75rem;
+        left: -23px;
+        top: 5px;
+        z-index: 10;
+        border-radius: 9999px;
+        background: white;
+        border: 2px solid theme('colors.brand.light')
+    }
+</style>

@@ -30,7 +30,7 @@ if (content.heading) {
   <section>
     <div class="splide" id="main-slider" aria-labelledby="slider-heading">
       <div class="splide__arrows"></div>
-      <div class="track-mask splide__track">
+      <div class="splide__track -mx-16">
         <ul class="splide__list">
           {
             content.entries.map((slide) => {
@@ -83,7 +83,7 @@ if (content.heading) {
 </div>
 
 <style is:global>
-  .track-mask {
+  /* .track-mask {
     -webkit-mask-image: linear-gradient(
       to right,
       transparent,
@@ -98,7 +98,7 @@ if (content.heading) {
       black 80%,
       transparent
     );
-  }
+  } */
 </style>
 
 <script>

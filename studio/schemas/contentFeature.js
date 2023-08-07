@@ -8,20 +8,20 @@ export default {
       title: 'Feature Title',
       description: 'Short title under 60 characters.',
       type: 'string',
-      validation: (Rule) => Rule.required().max(60),
+      validation: (Rule) => Rule.required().max(60).warning('Keep this text under 60 characters.'),
     },
     {
       name: 'description',
       title: 'Feature Description',
       description: 'Preview text under 300 characters.',
       type: 'text',
-      validaton: (Rule) => Rule.required().max(300),
+      validaton: (Rule) => Rule.required().max(300).warning('Keep this text under 300 characters.'),
     },
     {
       name: 'link',
       title: 'Link',
       type: 'link',
-      validation: Rule => Rule.required(),
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'image',
@@ -29,7 +29,7 @@ export default {
       description:
         'Upload an image of the best possible resolution quality (suggested minimum 1000 px wide) while remaining under 8 MB in size. Once uploaded, visit the Media tab to add alternative text and media tags to the image.',
       type: 'image',
-      validation: Rule => Rule.required(),
+      validation: (Rule) => Rule.required(),
       options: {
         hotspot: true,
         accept: 'image/*',
@@ -38,9 +38,9 @@ export default {
   ],
   preview: {
     prepare() {
-        return {
-            title: 'Preview Feature'
-        }
-    }
-  }
+      return {
+        title: 'Preview Feature',
+      }
+    },
+  },
 }

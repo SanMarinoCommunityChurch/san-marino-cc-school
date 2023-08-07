@@ -1,0 +1,19 @@
+---
+import slugify from "../utils/slugify";
+const props = Astro.props;
+
+const { node, ...attrs } = props;
+const styleIs = (style) => style === node.style;
+---
+
+{
+  styleIs("h2") ? (
+    <h2 id={slugify(node.children[0].text)} {...attrs}>
+      <slot />
+    </h2>
+  ) : (
+    <h3 id={slugify(node.children[0].text)} {...attrs}>
+      <slot />
+    </h3>
+  )
+}

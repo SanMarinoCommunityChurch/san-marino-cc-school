@@ -1,12 +1,11 @@
 ---
 import SectionPage from "@layouts/SectionPage.astro";
-import IntroSection from "@components/IntroSection.astro";
 import RichContent from "@components/RichContent.astro";
-import FeatureLink from "@components/FeatureLink.astro";
 import Gallery from "@components/Gallery.astro";
 import FeatureList from "@components/FeatureList.astro";
 import IntroSectionList from "@components/IntroSectionList.astro";
 import HighlightsGrid from "@components/HighlightsGrid.astro";
+import DateList from "@components/DateList.astro";
 import CTA from "@components/CTA.astro";
 import FAQSection from "@components/FAQSection.astro";
 import { pages } from "@lib/pages";
@@ -53,13 +52,18 @@ const { page } = Astro.props;
                   <Gallery content={section} />
                 </article>
               )}
+              {section.type == "dateList" && (
+                <article class="content-wrapper">
+                  <DateList content={section} />
+                </article>
+              )}
               {section.type == "faq" && (
-                <article class="content-wrapper w-full">
+                <article class="content-wrapper | w-full">
                   <FAQSection content={section} />
                 </article>
               )}
               {section.type == "richContent" && (
-                <article class="content-wrapper">
+                <article class="content-wrapper | w-full">
                   <RichContent content={section.portableText} />
                 </article>
               )}
