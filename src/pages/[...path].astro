@@ -49,7 +49,7 @@ const { page } = Astro.props;
               )}
               {section.type == "highlightGrid" && (
                 <article class="content-wrapper">
-                  <HighlightsGrid content={section} />
+                  <HighlightsGrid content={section} randomBgs />
                 </article>
               )}
               {section.type == "gallery" && (
@@ -94,7 +94,7 @@ const { page } = Astro.props;
     }
     {page._id === 'eea13d84-fc4b-4b50-8e39-45d0553cfdd6' &&
       <article class="content-wrapper">
-        <div class="grid grid-cols-2 gap-x-8 gap-y-16">
+        <div class="columns-2 gap-x-12 [&>*]:mt-16 [&>*:first-child]:mt-0">
           {testimonials.map((testimonial, index) => {
             return (
               <Testimonial content={testimonial} theme={index % 3 === 0 ? 'brand' : index % 3 === 1 ? 'accent-red' : 'accent-yellow'} portableText />

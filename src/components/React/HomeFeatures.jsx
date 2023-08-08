@@ -24,7 +24,7 @@ export default function Features({ entries }) {
   return (
     <Tab.Group
       as="div"
-      className="my-16 grid grid-cols-1 items-center gap-y-2 pt-10 sm:gap-y-6 lg:grid-cols-12 lg:pt-0"
+      className="relative z-[5] my-16 grid grid-cols-1 items-center gap-y-2 pt-10 sm:gap-y-6 lg:grid-cols-12 lg:pt-0"
       vertical={tabOrientation === "vertical"}
     >
       {({ selectedIndex }) => (

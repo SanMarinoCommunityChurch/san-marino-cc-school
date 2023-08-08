@@ -1,9 +1,8 @@
 ---
 import { urlFor } from "@lib/sanity";
 import getYouTubeID from "get-youtube-id";
-import { PortableText } from "astro-portabletext";
 
-const { content, layout = "default" } = Astro.props;
+const { content, layout = "default", bgDecorativeImage } = Astro.props;
 ---
 
 <section
@@ -23,7 +22,7 @@ const { content, layout = "default" } = Astro.props;
   </div>
   {
     content.mediaType == "image" ? (
-      <div>
+      <div class="relative">
         <img
           src={urlFor(content.image)
             .width(900)
@@ -38,6 +37,9 @@ const { content, layout = "default" } = Astro.props;
           loading="lazy"
           decoding="async"
         />
+        {bgDecorativeImage && 
+          <img class:list={["absolute w-3/4 -z-[1] -bottom-12", layout == 'flipped' ? 'rotate-6 -left-10' : '-rotate-6 -right-10']} src={bgDecorativeImage} alt="" width={900} />
+        }
       </div>
     ) : content.mediaType == "video" ? (
       <iframe

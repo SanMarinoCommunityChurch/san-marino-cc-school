@@ -1,5 +1,15 @@
 ---
 import IntroSection from "./IntroSection.astro";
+import notepadSheet from "../assets/images/notepad-sheet.webp?url"
+import paintSquare from "../assets/images/paint-square.webp?url"
+import paintSmear from "../assets/images/paint-smear.webp?url"
+
+const bgDecorativeImages = [
+  notepadSheet,
+  paintSquare,
+  paintSmear
+]
+
 const { content } = Astro.props;
 
 function isOdd(num) {
@@ -32,6 +42,7 @@ if (content.heading) {
           <IntroSection
             content={entry}
             layout={isOdd(index) ? "flipped" : "default"}
+            bgDecorativeImage={bgDecorativeImages[index % 3]}
           />
         );
       })

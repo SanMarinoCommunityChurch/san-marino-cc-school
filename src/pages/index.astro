@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "@astrojs/image/components";
+// import { Image } from "@astrojs/image/components";
 import Button from "@components/Button.astro";
 import HighlightsGrid from "@components/HighlightsGrid.astro";
 import CTA from "@components/CTA.astro";
@@ -13,36 +13,8 @@ import { posts } from "@lib/posts"
 import { urlFor } from "@lib/sanity";
 import constructHref from "../utils/constructHref";
 
-// import heroImg from "../assets/images/SMCC-NurserySchool_038.jpg";
-// const placeholder = [
-//   {
-//     title: "Our Mission",
-//     description:
-//       "Providing a Christian atmosphere that offers young children the opportunity to learn.",
-//     link: {
-//       name: "Learn More",
-//       href: "/",
-//     },
-//   },
-//   {
-//     title: "Programs",
-//     description:
-//       "Providing a Christian atmosphere that offers young children the opportunity to learn.",
-//     link: {
-//       name: "Learn More",
-//       href: "/",
-//     },
-//   },
-//   {
-//     title: "Community",
-//     description:
-//       "Providing a Christian atmosphere that offers young children the opportunity to learn.",
-//     link: {
-//       name: "Learn More",
-//       href: "/",
-//     },
-//   },
-// ];
+import paintSquare from "../assets/images/paint-square.webp?url"
+
 const featuredTestimonials = testimonials.slice(0,3)
 const featuredPosts = posts.slice(0,3);
 const { hero, intro, presentation, cta, seo } = homePage;
@@ -55,7 +27,7 @@ const { hero, intro, presentation, cta, seo } = homePage;
   ogDescription: seo.ogDescription || seo.description || undefined,
   ogImage: seo.ogImage || undefined
 }}>
-  <main slot="main">
+  <main class="overflow-x-hidden" slot="main">
     <article
       class="relative max-h-[90vh] overflow-hidden flex flex-col justify-center items-start"
     >
@@ -103,13 +75,17 @@ const { hero, intro, presentation, cta, seo } = homePage;
         <p class="text-center text-2xl leading-normal max-w-3xl mx-auto">
           {presentation.text}
         </p>
-        <HomeFeatures client:load entries={presentation.entries} />
+        <div class="relative">
+          <HomeFeatures client:load entries={presentation.entries} />
+          <img class="absolute -rotate-[14deg] opacity-90 w-[20rem] -bottom-12 -left-16" src={paintSquare} alt="" width={900} />
+        </div>
         <div class="mx-auto text-center">
           <Button href={constructHref(presentation.linkItem.link)}>
             {presentation.linkItem.linkName || hero.linkItem.link.pageName}
           </Button>
         </div>
       </div>
+      <img class="absolute w-32 -top-6 -right-4 rotate-12" src={paintSquare} alt="" width={900} />
     </article>
     <div class="content-wrapper py-24">
       <h2 class="text-3xl text-center mb-8">Parent Testimonials</h2>

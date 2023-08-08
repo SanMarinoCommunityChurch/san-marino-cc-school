@@ -5,17 +5,31 @@ const { content } = Astro.props;
 ---
 
 <div class="absolute -bottom-32 flex items-center justify-center">
-    <div class="relative flex flex-wrap items-center gap-5 z-[5] bg-white rounded-sm px-6 py-3 m-[0.45rem]">
+    <div class="local-nav | relative flex flex-wrap items-center gap-5 z-[5] bg-white rounded-sm px-6 py-3 m-[0.45rem]">
         <div class="font-heading">{content.sectionName}</div>
         <div class="text-gray-300">|</div>
         <ul class="flex flex-wrap items-center gap-5">
             {content.sectionLinks.map((linkItem) => {
                 const url = constructHref(linkItem.link);
                 return (
-                    <li><Button href={url} type="none" className={Astro.url.pathname === url && 'text-brand-dark font-bold'}>{linkItem.linkName || linkItem.link.pageName}</Button></li>
+                    <li><Button href={url} type="none">{linkItem.linkName || linkItem.link.pageName}</Button></li>
                 )
             })}
         </ul>
     </div>
     <div class="rainbow-gradient absolute inset-0 rounded-md w-full h-full"></div>
 </div>
+
+<script>
+    const localNav = document.querySelector('.local-nav');
+    const currentUrl = window.location.pathname;
+    if (localNav) {
+        const navLinks = localNav.querySelectorAll('a');
+        navLinks.forEach((link) => {
+            if (link.pathname + "/" === currentUrl || link.pathname === currentUrl) {
+                link.style.color = '#00829B';
+                link.style.fontWeight = '700';
+            }
+        })
+    }
+</script>
