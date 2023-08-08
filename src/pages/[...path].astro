@@ -30,8 +30,8 @@ const { path } = Astro.params;
 const { page } = Astro.props;
 ---
 
-<SectionPage pageName={page.pageName} headerText={page.headerText} seo={page.seo}>
-  <div class="flow | gap-32 my-24">
+<SectionPage pageId={page._id} pageName={page.pageName} headerText={page.headerText} seo={page.seo}>
+  <div class="flow | gap-32 my-24 pt-6">
     {
       page.pageContent ? (
         page.pageContent.map((section) => {

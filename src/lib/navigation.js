@@ -1,29 +1,5 @@
 import { getSanityData, groqLinkType } from "./sanity";
 
-// const groqLinkType = `_type == 'link' => {
-//   "type": _type,
-//   "linkName": name,
-//   "link": href[0]{
-//     _type == 'pageRef' => @-> {
-//       "type": _type,
-//       "pageName": name,
-//       sectionSlug,
-//       "href": slug{
-//         current,
-//         "full": fullUrl
-//       }
-//     },
-//     _type == 'slugString' => {
-//       "type": _type,
-//       "href": slug
-//     },
-//     _type == 'externalLink' => {
-//       "type": _type,
-//       "href": url
-//     }
-//   }
-// }`
-
 export const navigation = await getSanityData(`*[_type == 'navigation'] {
   _id,
   name,
@@ -42,3 +18,5 @@ export const navigation = await getSanityData(`*[_type == 'navigation'] {
 export function getNavigation(id) {
   return navigation.find((item) => item._id === id);
 }
+
+export const mainNavigation = getNavigation("79fe02eb-35a4-40bd-ae80-15ef86d6245f");

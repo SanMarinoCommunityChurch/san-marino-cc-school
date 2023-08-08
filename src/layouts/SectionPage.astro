@@ -1,7 +1,11 @@
 ---
 import Layout from "./Layout.astro";
+import filterLocalNav from "../utils/filterLocalNav";
+import LocalNav from "@components/LocalNav.astro";
+import { mainNavigation } from "@lib/navigation";
 
-const { seo, pageName, headerText } = Astro.props;
+const { pageId, seo, pageName, headerText } = Astro.props;
+const localNav = filterLocalNav(pageId, mainNavigation);
 ---
 
 <Layout meta={{
@@ -17,6 +21,9 @@ const { seo, pageName, headerText } = Astro.props;
         <h1 class="text-5xl">{pageName}</h1>
         {/* prettier-ignore */}
         <p class="mt-8 text-xl max-w-3xl leading-normal">{headerText}</p>
+        {localNav && 
+          <LocalNav content={localNav} />
+        }
       </div>
     </section>
     <slot />

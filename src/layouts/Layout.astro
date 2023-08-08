@@ -1,20 +1,13 @@
 ---
 import { SEO } from "astro-seo";
-import { Image } from "@astrojs/image/components";
+// import { Image } from "@astrojs/image/components";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { urlFor } from "@lib/sanity";
 import "../styles/global.css";
-import { navigation, getNavigation } from "@lib/navigation";
+import { mainNavigation } from "@lib/navigation";
 import { siteSettings } from "@lib/siteSettings";
 
-const mainNavigation = getNavigation("79fe02eb-35a4-40bd-ae80-15ef86d6245f");
-
-// const siteMeta = {
-//   title: "San Marino Community Church Nursery School",
-//   description:
-//     "SMCCNS is a community of children, families, and teachers committed to learning and growing through a process of research and discovery.",
-// };
 const { siteName, siteDescription, defaultOgImage } = siteSettings;
 
 const { meta } = Astro.props;
@@ -26,7 +19,6 @@ const { title, description, ogTitle, ogImage, ogImageExternal, ogDescription } =
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/smcc-school-favicon.png" />
     <SEO
       title={title ? `${title} | ${siteName}` : siteName}
       description={description || siteDescription}
@@ -40,6 +32,36 @@ const { title, description, ogTitle, ogImage, ogImageExternal, ogDescription } =
           description: ogDescription || siteDescription
         }
       }}
+    />
+    <link rel="icon" type="image/png" href="/smcc-school-favicon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="preload"
+      href="/fonts/Mali-Bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/Nunito-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/Nunito-Italic.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/Nunito-Bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
     <script defer src="/fontawesome/solid.min.js"></script>
     <script defer src="/fontawesome/brands.min.js"></script>

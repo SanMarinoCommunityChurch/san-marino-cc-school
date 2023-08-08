@@ -28,6 +28,7 @@ export const groqLinkType = `_type == 'link' => {
   "linkName": name,
   "link": href[0]{
     _type == 'pageRef' => @-> {
+      "pageId": _id,
       "type": _type,
       "pageName": name,
       sectionSlug,
