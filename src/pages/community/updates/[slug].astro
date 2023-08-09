@@ -1,10 +1,11 @@
 ---
 import SectionPage from "../../../layouts/SectionPage.astro";
 import RichContent from "../../../components/RichContent.astro";
-import formatFromISO from "../../../utils/formatFromISO"
 import { urlFor } from "../../../lib/sanity"
 import CTA from "../../../components/CTA.astro";
+import getImageHeight from "../../../utils/getImageHeight"
 import { posts } from "../../../lib/posts"
+import { DateTime } from "luxon"
 
 export async function getStaticPaths() {
     const allPosts = posts;
@@ -20,18 +21,44 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 const { post } = Astro.props;
+
+const timeFormat = `cccc, LLLL d, y 'at' t`
+
+function formatTime(datetime) {
+    return DateTime.fromISO(datetime).setZone('America/Los_Angeles').toFormat(timeFormat);
+}
+
+function assembleTimeRange(firstDatetime, secondDatetime) {
+    const start = DateTime.fromISO(firstDatetime).setZone('America/Los_Angeles');
+    const end = DateTime.fromISO(secondDatetime).setZone('America/Los_Angeles');
+    return `${start.toFormat("cccc, LLLL d, y 'from' t")} to ${end.toFormat("t")}`
+}
 ---
 
 <SectionPage pageName={post.name} headerText={post.preview} seo={post.seo}>
     <article class="content-wrapper flow | gap-12 my-24">
-            <img class="max-w-3xl mx-auto rounded-lg" src={urlFor(post.image)?.width(900).url()} width={900} alt={post.image.asset.altText || ""}>
+            <img class="max-w-3xl mx-auto rounded-lg" src={urlFor(post.image)?.width(900).url()} width={900} height={getImageHeight(post.image)} alt={post.image.asset.altText || ""}>
             {post.event && 
-                <div class="bg-brand-dark text-white rounded-md p-6 max-w-3xl w-full mx-auto flex flex-col gap-3">
-                    <div class="font-heading text-xl">Event Details</div>
-                    <time datetime={post.eventDetails.date}><span class="font-bold">Time: </span><span>{formatFromISO(post.eventDetails.date, 'DATETIME_FULL')}</span></time>
-                    <div><span class="font-bold">Location: </span><span>{post.eventDetails.location}</span></div>
+                <div class="relative bg-brand-dark text-white rounded-md p-6 max-w-3xl w-full mx-auto flex flex-col gap-3">
+                    <div class="font-heading text-2xl relative z-[2]">
+                        <i class="fa-solid fa-calendar-days fa-sm mr-1"></i>
+                        <span>Event Details</span>
+                    </div>
+                    <div class="flex flex-col gap-1 relative z-[2]">
+                        <time datetime={post.eventDetails.date}><span class="font-bold">Time: </span><span>{post.eventDetails.endDate ? assembleTimeRange(post.eventDetails.date, post.eventDetails.endDate) : formatTime(post.eventDetails.date)}</span></time>
+                        <div><span class="font-bold">Location: </span><span>{post.eventDetails.location}</span></div>
+                    </div>
+                    <div class="pattern-bg absolute w-full h-full right-0 top-0 bottom-0 z-[1]"></div>
                 </div>
             }
             <RichContent content={post.portableText} />
     </article>
 </SectionPage>
+
+<style>
+    .pattern-bg {
+        -webkit-mask-image: linear-gradient(to left, black, transparent 40%);
+        mask-image: linear-gradient(to left, black, transparent 40%);
+        background-image: url("data:image/svg+xml,%3Csvg width='62' height='36' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2339bdde' fill-opacity='0.4'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+</style>
