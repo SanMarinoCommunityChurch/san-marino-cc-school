@@ -1,6 +1,8 @@
 ---
 import Button from "./Button.astro";
 import NavMenu from "@components/React/NavMenu.jsx";
+import SvelteMenu from "@components/Svelte/NavMenu.svelte"
+import SvelteMenuMobile from "@components/Svelte/NavMenuMobile.svelte"
 import { siteSettings } from "@lib/siteSettings";
 import constructHref from "../utils/constructHref";
 
@@ -10,23 +12,19 @@ const { siteHeader } = siteSettings;
 ---
 
 <header
-  class="px-12 py-6 flex justify-between items-center bg-white shadow-xl z-50"
+  class="px-6 py-4 md:px-12 md:py-6 flex gap-y-8 flex-wrap justify-between items-center bg-white shadow-xl w-full fixed md:relative z-50"
 >
-  <div class="flex flex-wrap gap-8 items-center">
-    <a href="/" class="logo">
-      <img src="/smccns-logo.png" width="100" alt="" />
+  <div class="flex flex-nowrap gap-8 items-center justify-between w-full md:w-auto md:justify-start">
+    <a href="/" class="inline-block logo w-[100px] shrink-0">
+      <img src="/smccns-logo.png" width="100" alt="San Marino Community Church Nursery School logo" />
     </a>
-    <nav class="flex gap-8 items-center">
+    <nav class="hidden md:flex flex-wrap gap-x-8 gap-y-2 items-center">
       {
         mainNavigation.entries.map((navItem) => {
           return (
             <>
               {navItem.type === "navigationSection" && (
-                <NavMenu
-                  client:load
-                  title={navItem.sectionName}
-                  entries={navItem.sectionLinks}
-                />
+                <SvelteMenu client:load title={navItem.sectionName} entries={navItem.sectionLinks} />
               )}
               {navItem.type === "link" && (
                 <Button type="none" href={constructHref(navItem.link)}>
@@ -38,8 +36,51 @@ const { siteHeader } = siteSettings;
         })
       }
     </nav>
+    <nav class="md:hidden">
+      <SvelteMenuMobile client:load>
+        <div slot="panel" class="relative z-[2]">
+          {mainNavigation.entries.map((navItem) => {
+            return (
+              <>
+            {navItem.type === "navigationSection" && (
+              <div class="mt-8 text-left">
+                <div class="ml-2 font-bold text-xl text-gray-800">
+                  {navItem.sectionName}
+                </div>
+                <ul class="mt-3">
+                  {navItem.sectionLinks.map((entry) => {
+                    return (
+                      <li class="mt-3">
+                        <a
+                          href={constructHref(entry.link)}
+                          class="hover:text-brand-dark hover:bg-brand-light/10 inline-block w-fit rounded-md p-2 text-lg leading-tight"
+                        >
+                          {entry.linkName || entry.link.pageName}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+            {navItem.type === "link" && (
+              <Button
+                width="fit"
+                type="none"
+                className="place-self-start justify-self-center mt-8 text-center xl:text-left xl:place-self-start xl:mt-0 xl:justify-self-auto"
+                href={constructHref(navItem.link)}
+              >
+                {navItem.linkName || navItem.link.pageName}
+              </Button>
+            )}
+          </>
+            )
+          })}
+        </div>
+      </SvelteMenuMobile>
+    </nav>
   </div>
-  <div class="flex gap-6 items-center">
+  <div class="hidden md:flex gap-6 items-center">
     <Button href={siteHeader.href} style="rainbow">
       <span class="rainbow-btn-text font-bold">{siteHeader.name}</span>
     </Button>
@@ -55,5 +96,10 @@ const { siteHeader } = siteSettings;
     padding-inline: 0.5rem;
     padding-block: 0.25rem;
     color: theme("colors.accent.red-dark");
+  }
+
+  :global(.menu-pattern-bg) {
+    background-color: #eafbff;
+    background-image: url("data:image/svg+xml,%3Csvg width='92' height='66' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2339bdde' fill-opacity='0.13'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
 </style>

@@ -15,9 +15,10 @@ const { mainNavigation } = Astro.props;
       <img src={urlFor(siteSettings.logo).width(400).url()} width={200} alt="San Marino Community Church Nursery School logo" />
     </a>
   </div>
-  <div class="grid grid-cols-7 gap-4">
+  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-4">
     <iframe
-      class="col-span-2 w-full max-h-48 pr-8"
+      title="San Marino Community Church Nursery School map location at 1750 Virginia Road, San Marino."
+      class="md:col-span-3 xl:col-span-2 w-full max-h-48 xl:pr-8"
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3303.166347003515!2d-118.1188203237824!3d34.11649087313277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c4cbbc2e5e83%3A0xa506500431a79522!2s1750%20Virginia%20Rd%2C%20San%20Marino%2C%20CA%2091108!5e0!3m2!1sen!2sus!4v1690830080049!5m2!1sen!2sus"
       width="600"
       height="450"
@@ -30,17 +31,17 @@ const { mainNavigation } = Astro.props;
         return (
           <>
             {navItem.type === "navigationSection" && (
-              <div>
+              <div class="mt-8 xl:mt-0 text-center xl:text-left">
                 <div class="font-bold text-xl text-gray-800">
                   {navItem.sectionName}
                 </div>
-                <ul class="-ml-2 mt-3">
+                <ul class="xl:-ml-2 mt-3">
                   {navItem.sectionLinks.map((entry) => {
                     return (
-                      <li>
+                      <li class="mt-3 xl:mt-0">
                         <a
                           href={constructHref(entry.link)}
-                          class="hover:text-brand-dark hover:bg-brand-light/10 inline-block w-full rounded-md p-2 text-base leading-tight"
+                          class="hover:text-brand-dark hover:bg-brand-light/10 inline-block w-fit xl:w-full rounded-md p-2 text-base leading-tight"
                         >
                           {entry.linkName || entry.link.pageName}
                         </a>
@@ -54,7 +55,7 @@ const { mainNavigation } = Astro.props;
               <Button
                 width="fit"
                 type="none"
-                className="place-self-start"
+                className="place-self-start justify-self-center mt-8 text-center xl:text-left xl:place-self-start xl:mt-0 xl:justify-self-auto"
                 href={constructHref(navItem.link)}
               >
                 {navItem.linkName || navItem.link.pageName}
@@ -65,11 +66,11 @@ const { mainNavigation } = Astro.props;
       })
     }
   </div>
-  <div class="flex flex-wrap justify-between gap-6 items-center">
-    <div class="py-8 text-sm">
+  <div class="flex flex-wrap justify-center mt-12 sm:mt-0 sm:justify-between gap-x-6 gap-y-2 items-center">
+    <div class="order-2 sm:order-1 py-8 text-sm">
       © {date.toFormat("yyyy")} San Marino Community Church Nursery School <span class="mx-2">|</span> Site by <a href="https://www.ds-design.xyz" target="_blank" class="underline hover:no-underline">DS Design</a>
     </div>
-    <ul class="flex flex-wrap gap-6">
+    <ul class="order-1 sm:order-2 flex flex-wrap gap-6">
       {siteSettings.socialLinks.map((link) => 
         <li>
           <a class="hover:opacity-80" href={link.url} target="_blank"><i class={`fa-brands fa-${link.icon} fa-xl`}></i><span class="sr-only">{link.name}</span></a>

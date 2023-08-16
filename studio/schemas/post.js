@@ -30,6 +30,9 @@ export default {
       title: 'Post Publish Date',
       validation: (Rule) => Rule.required().error('Required field.'),
       type: 'date',
+      options: {
+        dateFormat: 'MMMM D, YYYY',
+      },
       group: 'content',
     },
     {
@@ -70,6 +73,11 @@ export default {
           name: 'date',
           title: 'Event Start Date & Time',
           type: 'datetime',
+          options: {
+            dateFormat: 'dddd, MMMM D, YYYY',
+            timeFormat: 'h:mm A',
+            timeStep: 15,
+          },
           validation: (Rule) => Rule.required(),
         },
         {
@@ -77,6 +85,11 @@ export default {
           title: 'Event End Date & Time',
           description: 'Optional.',
           type: 'datetime',
+          options: {
+            dateFormat: 'dddd, MMMM D, YYYY',
+            timeFormat: 'h:mm A',
+            timeStep: 15,
+          },
         },
         {
           name: 'location',

@@ -36,8 +36,8 @@ function assembleTimeRange(firstDatetime, secondDatetime) {
 ---
 
 <SectionPage pageName={post.name} headerText={post.preview} seo={post.seo}>
-    <article class="content-wrapper flow | gap-12 my-24">
-            <img class="max-w-3xl mx-auto rounded-lg" src={urlFor(post.image)?.width(900).url()} width={900} height={getImageHeight(post.image)} alt={post.image.asset.altText || ""}>
+    <article class="content-wrapper flow | gap-12 mt-16 mb-24 md:my-24">
+            <img class="max-w-none w-full md:max-w-3xl mx-auto rounded-lg" src={urlFor(post.image)?.width(900).url()} width={900} height={getImageHeight(post.image)} alt={post.image.asset.altText || ""}>
             {post.event && 
                 <div class="relative bg-brand-dark text-white rounded-md p-6 max-w-3xl w-full mx-auto flex flex-col gap-3">
                     <div class="font-heading text-2xl relative z-[2]">

@@ -54,7 +54,7 @@ if (content.heading) {
         </ul>
       </div>
     </div>
-    <div class="splide mt-4" id="thumbnail-slider">
+    <div class="hidden md:block splide mt-4" id="thumbnail-slider">
       <div class="splide__track">
         <ul class="splide__list">
           {
@@ -82,45 +82,37 @@ if (content.heading) {
   </section>
 </div>
 
-<style is:global>
-  /* .track-mask {
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 20%,
-      black 80%,
-      transparent
-    );
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 20%,
-      black 80%,
-      transparent
-    );
-  } */
-</style>
-
 <script>
   import Splide from "@splidejs/splide";
   import "@splidejs/splide/css";
 
-  const slider = new Splide("#main-slider", {
-    type: "loop",
-    gap: "2rem",
-    padding: "15%",
-  });
+  // check for slider element first to prevent console errors
+  const mainSlider = document.querySelector("#main-slider");
 
-  const thumbnailSlider = new Splide("#thumbnail-slider", {
-    rewind: true,
-    isNavigation: true,
-    gap: "0.5rem",
-    focus: "center",
-    pagination: false,
-    fixedWidth: 100,
-  });
+  if (mainSlider) {
+    const slider = new Splide("#main-slider", {
+      type: "loop",
+      gap: "2rem",
+      padding: "15%",
+      breakpoints: {
+        768: {
+          gap: "1rem",
+          padding: "10%"
+        }
+      }
+    });
 
-  slider.sync(thumbnailSlider);
-  slider.mount();
-  thumbnailSlider.mount();
+    const thumbnailSlider = new Splide("#thumbnail-slider", {
+      rewind: true,
+      isNavigation: true,
+      gap: "0.5rem",
+      focus: "center",
+      pagination: false,
+      fixedWidth: 100,
+    });
+
+    slider.sync(thumbnailSlider);
+    slider.mount();
+    thumbnailSlider.mount();
+    }
 </script>

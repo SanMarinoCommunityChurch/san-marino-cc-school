@@ -4,20 +4,35 @@ import constructHref from "../utils/constructHref"
 const { content } = Astro.props;
 ---
 
-<div class="absolute -bottom-32 flex items-center justify-center">
-    <div class="local-nav | relative flex flex-wrap items-center gap-5 z-[5] bg-white rounded-sm px-6 py-3 m-[0.45rem]">
-        <div class="font-heading">{content.sectionName}</div>
-        <div class="text-gray-300">|</div>
-        <ul class="flex flex-wrap items-center gap-5">
-            {content.sectionLinks.map((linkItem) => {
-                const url = constructHref(linkItem.link);
-                return (
-                    <li><Button href={url} type="none">{linkItem.linkName || linkItem.link.pageName}</Button></li>
-                )
-            })}
-        </ul>
+<div>
+    <div class="hidden md:flex absolute -bottom-32 items-center justify-center">
+        <div class="local-nav | relative flex flex-wrap items-center gap-5 z-[5] bg-white rounded-sm px-6 py-3 m-[0.45rem]">
+            <div class="font-heading">{content.sectionName}</div>
+            <div class="text-gray-300">|</div>
+            <ul class="flex flex-wrap items-center gap-5">
+                {content.sectionLinks.map((linkItem) => {
+                    const url = constructHref(linkItem.link);
+                    return (
+                        <li><Button href={url} type="none">{linkItem.linkName || linkItem.link.pageName}</Button></li>
+                    )
+                })}
+            </ul>
+        </div>
+        <div class="rainbow-gradient absolute inset-0 rounded-md w-full h-full"></div>
     </div>
-    <div class="rainbow-gradient absolute inset-0 rounded-md w-full h-full"></div>
+    <div class="md:hidden mt-12">
+        <details>
+            <summary class="font-heading text-gray-800">{`${content.sectionName} Pages`}</summary>
+            <ul class="flex flex-wrap items-center gap-4 mt-4">
+                {content.sectionLinks.map((linkItem) => {
+                    const url = constructHref(linkItem.link);
+                    return (
+                        <li><Button href={url} type="none">{linkItem.linkName || linkItem.link.pageName}</Button></li>
+                    )
+                })}
+            </ul>
+        </details>
+    </div>
 </div>
 
 <script>

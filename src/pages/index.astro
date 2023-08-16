@@ -6,7 +6,9 @@ import HighlightsGrid from "@components/HighlightsGrid.astro";
 import CTA from "@components/CTA.astro";
 import Testimonial from "@components/Testimonial.astro";
 import HomeFeatures from "@components/React/HomeFeatures.jsx";
+import HomeTabs from "@components/Svelte/HomeTabs.svelte"
 import PostPreview from "@components/PostPreview.astro";
+import NativePopover from '@components/NativePopover.astro'
 import { homePage } from "@lib/pages";
 import { testimonials } from "@lib/testimonials";
 import { posts } from "@lib/posts"
@@ -31,9 +33,9 @@ const { hero, intro, presentation, cta, seo } = homePage;
     <article
       class="relative max-h-[90vh] overflow-hidden flex flex-col justify-center items-start"
     >
-      <div class="content-wrapper | w-full relative z-[3] my-32 text-white">
+      <div class="content-wrapper | w-full relative z-[3] mt-60 md:mt-40 mb-32 text-white">
         <div class="flow | gap-8 | max-w-2xl">
-          <h1 class="text-heading text-6xl font-bold text-white">
+          <h1 class="text-heading text-5xl sm:text-6xl font-bold text-white">
             {hero.heading}
           </h1>
           <p>
@@ -76,7 +78,8 @@ const { hero, intro, presentation, cta, seo } = homePage;
           {presentation.text}
         </p>
         <div class="relative">
-          <HomeFeatures client:load entries={presentation.entries} />
+          <HomeTabs client:load entries={presentation.entries} />
+          <!-- <HomeFeatures client:load entries={presentation.entries} /> -->
           <img class="absolute -rotate-[14deg] opacity-90 w-[20rem] -bottom-12 -left-16" src={paintSquare} alt="" width={900} />
         </div>
         <div class="mx-auto text-center">
@@ -89,7 +92,7 @@ const { hero, intro, presentation, cta, seo } = homePage;
     </article>
     <div class="content-wrapper py-24">
       <h2 class="text-3xl text-center mb-8">Parent Testimonials</h2>
-      <div class="grid grid-cols-3 gap-8">
+      <div class="grid px-6 grid-cols-1 sm:px-0 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {featuredTestimonials.map((testimonial, index) => {
           return (
             <Testimonial content={testimonial} theme={index == 0 ? 'brand' : index == 1 ? 'accent-red' : 'accent-yellow'} />
@@ -101,7 +104,7 @@ const { hero, intro, presentation, cta, seo } = homePage;
     <CTA content={cta} />
     <div class="content-wrapper py-24">
       <h2 class="text-3xl mb-12">Recent Updates</h2>
-      <div class="grid grid-cols-3 gap-6">
+      <div class="grid gap-y-12 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8">
           {featuredPosts.map((post) => {
             return (
               <PostPreview content={post} href={`/community/updates/${post.slug}`} />

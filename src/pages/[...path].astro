@@ -31,7 +31,7 @@ const { page } = Astro.props;
 ---
 
 <SectionPage pageId={page._id} pageName={page.pageName} headerText={page.headerText} seo={page.seo}>
-  <div class="flow | gap-32 my-24 pt-6">
+  <div class="flow | my-16 gap-20 md:gap-32 md:my-24 md:pt-6">
     {
       page.pageContent ? (
         page.pageContent.map((section) => {
@@ -94,7 +94,7 @@ const { page } = Astro.props;
     }
     {page._id === 'eea13d84-fc4b-4b50-8e39-45d0553cfdd6' &&
       <article class="content-wrapper">
-        <div class="columns-2 gap-x-12 [&>*]:mt-16 [&>*:first-child]:mt-0">
+        <div class="md:columns-2 gap-x-12 [&>*]:mt-16 [&>*:first-child]:mt-0">
           {testimonials.map((testimonial, index) => {
             return (
               <Testimonial content={testimonial} theme={index % 3 === 0 ? 'brand' : index % 3 === 1 ? 'accent-red' : 'accent-yellow'} portableText />
@@ -105,7 +105,7 @@ const { page } = Astro.props;
     }
     {page._id === '1b98f686-d049-4e0d-be78-39b327d36c8e' &&
       <div class="content-wrapper w-full">
-        <div class="grid grid-cols-3 gap-6">
+        <div class="grid gap-y-12 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8">
           {posts.map((post) => {
             return (
               <PostPreview content={post} href={`/community/updates/${post.slug}`} />

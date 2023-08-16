@@ -30,6 +30,9 @@ export default {
               name: 'date',
               title: 'Date',
               type: 'date',
+              options: {
+                dateFormat: 'MMMM D, YYYY',
+              },
             },
             {
               name: 'range',
@@ -41,6 +44,9 @@ export default {
               name: 'endDate',
               title: 'End Date',
               type: 'date',
+              options: {
+                dateFormat: 'MMMM D, YYYY',
+              },
               hidden: ({parent}) => parent?.range == false,
             },
             {
@@ -72,9 +78,19 @@ export default {
             },
             prepare(selection) {
               const {title, date} = selection
+              const formatDate = (dateString) => {
+                const date = new Date(dateString)
+                return date.toLocaleDateString('en-US', {
+                  weekday: 'long',
+                  day: 'numeric',
+                  year: 'numeric',
+                  month: 'long',
+                  timeZone: 'UTC',
+                })
+              }
               return {
-                title: date,
-                subtitle: title,
+                title: title,
+                subtitle: formatDate(date),
               }
             },
           },

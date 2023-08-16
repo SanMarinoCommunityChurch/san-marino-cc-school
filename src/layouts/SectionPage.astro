@@ -15,10 +15,13 @@ const localNav = filterLocalNav(pageId, mainNavigation);
   ogDescription: seo.ogDescription || seo.description || headerText || undefined,
   ogImage: seo.ogImage || undefined
 }}>
-  <main slot="main">
-    <section class="hero pt-32 pb-24 bg-brand-light/20">
+  <Fragment slot="pageHead">
+    <slot name="pageHead"></slot>
+  </Fragment>
+  <main slot="main" class="overflow-x-hidden">
+    <section class="hero pt-48 pb-12 md:pt-32 md:pb-24 bg-brand-light/20">
       <div class="content-wrapper">
-        <h1 class="text-5xl">{pageName}</h1>
+        <h1 class="text-4xl sm:text-5xl">{pageName}</h1>
         {/* prettier-ignore */}
         <p class="mt-8 text-xl max-w-3xl leading-normal">{headerText}</p>
         {localNav && 

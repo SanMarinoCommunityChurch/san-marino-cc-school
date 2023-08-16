@@ -38,7 +38,7 @@ const { content, layout = "default", bgDecorativeImage } = Astro.props;
           decoding="async"
         />
         {bgDecorativeImage && 
-          <img class:list={["absolute w-3/4 -z-[1] -bottom-12", layout == 'flipped' ? 'rotate-6 -left-10' : '-rotate-6 -right-10']} src={bgDecorativeImage} alt="" width={900} />
+          <img class:list={["absolute w-3/4 -z-[1] -bottom-6 md:-bottom-12", layout == 'flipped' ? 'rotate-6 -left-10' : '-rotate-6 -right-10']} src={bgDecorativeImage} alt="" width={900} />
         }
       </div>
     ) : content.mediaType == "video" ? (
@@ -72,5 +72,11 @@ const { content, layout = "default", bgDecorativeImage } = Astro.props;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+  }
+
+  @media (max-width: 1024px) {
+    [data-layout="default"] > :first-child {
+    order: 1;
+  }
   }
 </style>

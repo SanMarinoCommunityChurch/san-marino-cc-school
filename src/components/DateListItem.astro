@@ -19,13 +19,19 @@ const formattedDate = formatFromISO(content.date, 'DATE_HUGE');
 
 <div class:list={["p-4 rounded-md relative", content.parentAndFamily && 'bg-brand-light/20']}>
     {content.parentAndFamily && 
-    <div class="absolute top-2 right-2 text-base px-2 py-1 leading-[1.2] bg-brand-dark text-white rounded-[0.25rem] flex items-center gap-2">
+    <div class="hidden absolute top-2 right-2 text-base px-2 py-1 leading-[1.2] bg-brand-dark text-white rounded-[0.25rem] md:flex items-center gap-2">
         <i class="fa-solid fa-family"></i>
         <span>Parent and Family Event</span>
     </div>
     }
     <time class="relative" datetime={content.date}>{content.range ? assembleDateRange(content.date, content.endDate) : formattedDate}</time>
     <h3 class="text-2xl leading-[1.3] mt-2">{content.heading}</h3>
+    {content.parentAndFamily && 
+    <div class="mt-4 text-base px-2 py-1 leading-[1.2] bg-brand-dark text-white rounded-[0.25rem] flex w-fit items-center gap-2 md:hidden">
+        <i class="fa-solid fa-family"></i>
+        <span>Parent and Family Event</span>
+    </div>
+    }
 </div>
 
 <style>

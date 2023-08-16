@@ -1,5 +1,6 @@
 ---
-import Accordion from "./React/Accordion";
+// import Accordion from "./React/Accordion";
+import Accordion from "./Svelte/Accordion.svelte"
 import { PortableText } from "astro-portabletext";
 const { content } = Astro.props;
 
@@ -25,8 +26,9 @@ if (content.heading) {
   <div class="faq | flex flex-col gap-8">
     {
       content.entries.map((item) => (
-        <Accordion client:load question={item.question}>
-          <PortableText value={item.answer} />
+        <Accordion client:load>
+          <Fragment slot="question">{item.question}</Fragment>
+          <PortableText slot="answer" value={item.answer} />
         </Accordion>
       ))
     }

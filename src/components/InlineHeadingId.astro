@@ -8,11 +8,11 @@ const styleIs = (style) => style === node.style;
 
 {
   styleIs("h2") ? (
-    <h2 id={slugify(node.children[0].text)} {...attrs}>
+    <h2 id={slugify(node.children[0].text)} {...attrs} class="scroll-mt-32 md:scroll-mt-12">
       <slot />
     </h2>
   ) : (
-    <h3 id={slugify(node.children[0].text)} {...attrs}>
+    <h3 id={slugify(node.children[0].text)} {...attrs} class="scroll-mt-32 md:scroll-mt-12">
       <slot />
     </h3>
   )
