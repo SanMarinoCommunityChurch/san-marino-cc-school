@@ -34,8 +34,11 @@ if (content.accent === "brand-light") {
   </div>
   <img
     src={urlFor(content.image).width(1200).auto("format").url()}
-    alt=""
+    alt={content.image.asset.altText || ""}
     width={1200}
+    height={Math.floor(1200 / content.image.asset.metadata.dimensions.aspectRatio)}
+    loading="lazy"
+    decoding="async"
     class="absolute inset-0 w-full h-full object-cover saturate-0 opacity-40"
   />
 </article>

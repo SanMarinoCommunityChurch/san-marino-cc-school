@@ -47,7 +47,7 @@ const shuffledBgs = randomBgs ? shuffleArray(bgDecorativeImages) : undefined;
       const bgImage = randomBgs ? shuffledBgs[index % 6] : bgDecorativeImages[index % 6]
       return (
         <div class="relative flow gap-6">
-          <img class="absolute w-20 -z-[1] -top-5 -left-6 opacity-25" src={bgImage} alt="" width={600} />
+          <img class="absolute w-20 -z-[1] -top-5 -left-6 opacity-25" src={bgImage} alt="" width={600} loading="lazy" decoding="async" />
           <h3 class="text-2xl">{item.heading}</h3>
           <p>{item.text}</p>
           {item.linkItem && (

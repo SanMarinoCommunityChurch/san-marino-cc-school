@@ -12,7 +12,7 @@ const { mainNavigation } = Astro.props;
 <footer class="content-wrapper border-t border-gray-200 pt-16">
   <div class="flex justify-center mb-12">
     <a class="transition-transform duration-300 hover:scale-105" href="/">
-      <img src={urlFor(siteSettings.logo).width(400).url()} width={200} alt="San Marino Community Church Nursery School logo" />
+      <img src={urlFor(siteSettings.logo).width(400).url()} width={200} height={Math.floor(200 / siteSettings.logo.asset.metadata.dimensions.aspectRatio)} alt="San Marino Community Church Nursery School logo" loading="lazy" />
     </a>
   </div>
   <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-4">

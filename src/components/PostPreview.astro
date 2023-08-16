@@ -11,7 +11,7 @@ const formattedDate = formatFromISO(content.publishDate, 'DATE_FULL');
     <a href={href} class="rounded-md shadow-md relative flex flex-col gap-4 max-w-lg overflow-hidden group">
         <div class="absolute top-3 right-3 bg-brand-dark text-white text-base px-2 py-1 rounded-sm leading-[1.15] z-10">{content.category.name}</div>
         <div class="">
-            <img class="transition-transform duration-300 group-hover:scale-105" src={urlFor(content.image).width(900).height(600).auto('format').url()} width={900} height={600} alt={content.image.asset.altText || ""}>
+            <img class="transition-transform duration-300 group-hover:scale-105" src={urlFor(content.image).width(900).height(600).auto('format').url()} width={900} height={600} alt={content.image.asset.altText || ""} loading="lazy" decoding="async">
         </div>
         <div class="px-6 pb-6 pt-2">
             <time class="relative text-sm" datetime={content.publishDate}>{`Posted on ${formattedDate}`}</time>

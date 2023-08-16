@@ -51,6 +51,8 @@
                         alt={entry.image.asset.altText || ""}
                         width={900}
                         height={900}
+                        loading="lazy"
+                        decoding="async"
                     />
                     </div>
                 </TransitionRoot>
