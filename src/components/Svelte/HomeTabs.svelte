@@ -39,7 +39,7 @@
                     leaveFrom="opacity-100"
                     leaveTo="-opacity-0"
                 >
-                    <div class="text-center mt-2 mb-8 xl:hidden">{entry.text}</div>
+                    <div class="text-center mt-2 mb-8 lg:hidden">{entry.text}</div>
                     <div class="relative h-full rounded-xl shadow-xl">
                         <img
                         class="w-full object-cover h-full rounded-xl"
