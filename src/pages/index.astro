@@ -55,6 +55,7 @@ const { hero, intro, presentation, cta, seo } = homePage;
         src={urlFor(hero.image).width(1200).height(Math.floor(1200 / hero.image.asset.metadata.dimensions.aspectRatio)).auto("format").url()}
         alt={hero.image.asset.altText || ""}
         class="absolute inset-0 w-full h-full object-cover | bg-center bg-no-repeat bg-cover"
+        loading="eager"
         style={`background-image: url(${hero.image.asset.metadata.lqip})`}
       />
       <div
