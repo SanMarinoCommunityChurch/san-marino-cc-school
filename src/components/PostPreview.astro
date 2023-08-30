@@ -1,6 +1,7 @@
 ---
 import { urlFor } from "@lib/sanity";
 import { DateTime } from "luxon"
+import ImageOpt from "./ImageOpt.astro";
 import formatFromISO from "../utils/formatFromISO";
 const { content, href } = Astro.props;
 
@@ -11,7 +12,12 @@ const formattedDate = formatFromISO(content.publishDate, 'DATE_FULL');
     <a href={href} class="rounded-md shadow-md relative flex flex-col gap-4 max-w-lg overflow-hidden group">
         <div class="absolute top-3 right-3 bg-brand-dark text-white text-base px-2 py-1 rounded-sm leading-[1.15] z-10">{content.category.name}</div>
         <div class="">
-            <img class="transition-transform duration-300 group-hover:scale-105" src={urlFor(content.image).width(900).height(600).auto('format').url()} width={900} height={600} alt={content.image.asset.altText || ""} loading="lazy" decoding="async">
+            <ImageOpt 
+            class="transition-transform duration-300 group-hover:scale-105 | bg-center bg-no-repeat bg-cover" 
+            src={urlFor(content.image).width(900).height(600).auto('format').url()} 
+            alt={content.image.asset.altText || ""}
+            style={`background-image: url(${content.image.asset.metadata.lqip})`}
+            >
         </div>
         <div class="px-6 pb-6 pt-2">
             <time class="relative text-sm" datetime={content.publishDate}>{`Posted on ${formattedDate}`}</time>

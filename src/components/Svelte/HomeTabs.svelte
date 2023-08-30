@@ -49,6 +49,7 @@
                         .auto("format")
                         .url()}
                         alt={entry.image.asset.altText || ""}
+                        style={`background-image: url(${entry.image.asset.metadata.lqip})`}
                         width={900}
                         height={900}
                         loading="lazy"

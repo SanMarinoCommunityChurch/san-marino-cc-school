@@ -1,7 +1,11 @@
 # build output
 dist/
+
 # generated types
 .astro/
+
+# 11ty fetch cache
+.cache
 
 # dependencies
 node_modules/
