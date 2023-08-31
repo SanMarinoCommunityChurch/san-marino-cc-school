@@ -35,7 +35,6 @@ function assembleTimeRange(firstDatetime, secondDatetime) {
     const end = DateTime.fromISO(secondDatetime).setZone('America/Los_Angeles');
     return `${start.toFormat("cccc, LLLL d, y 'from' t")} to ${end.toFormat("t")}`
 }
-console.log(post.image)
 ---
 
 <SectionPage pageName={post.name} headerText={post.preview} seo={post.seo}>
