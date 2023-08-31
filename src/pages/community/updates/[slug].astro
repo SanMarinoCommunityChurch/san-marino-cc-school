@@ -7,6 +7,7 @@ import getImageHeight from "../../../utils/getImageHeight"
 import { posts } from "../../../lib/posts"
 import { DateTime } from "luxon"
 import ImageOpt from "@components/ImageOpt.astro";
+import { PortableText } from "astro-portabletext";
 
 export async function getStaticPaths() {
     const allPosts = posts;
@@ -34,16 +35,19 @@ function assembleTimeRange(firstDatetime, secondDatetime) {
     const end = DateTime.fromISO(secondDatetime).setZone('America/Los_Angeles');
     return `${start.toFormat("cccc, LLLL d, y 'from' t")} to ${end.toFormat("t")}`
 }
+console.log(post.image)
 ---
 
 <SectionPage pageName={post.name} headerText={post.preview} seo={post.seo}>
     <article class="content-wrapper flow | gap-12 mt-16 mb-24 md:my-24">
+            {post.image &&
             <ImageOpt 
-            class="max-w-none w-full md:max-w-3xl mx-auto rounded-lg | bg-center bg-no-repeat bg-cover" 
-            src={urlFor(post.image)?.width(900).height(getImageHeight(post.image)).url()}
-            alt={post.image.asset.altText || ""}
-            style={`background-image: url(${post.image.asset.metadata.lqip})`}
-            >
+                class="max-w-none w-full md:max-w-3xl mx-auto rounded-lg | bg-center bg-no-repeat bg-cover" 
+                src={urlFor(post.image)?.width(900).height(getImageHeight(post.image)).url()}
+                alt={post.image.asset.altText || ""}
+                style={`background-image: url(${post.image.asset.metadata.lqip})`}
+            />
+            }
             {post.event && 
                 <div class="relative bg-brand-dark text-white rounded-md p-6 max-w-3xl w-full mx-auto flex flex-col gap-3">
                     <div class="font-heading text-2xl relative z-[2]">
