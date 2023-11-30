@@ -5,8 +5,8 @@ import formatFromISO from "../utils/formatFromISO";
 const { content } = Astro.props;
 
 function assembleDateRange(firstDate, secondDate) {
-    const start = DateTime.fromISO(firstDate).setZone('America/Los_Angeles');
-    const end = DateTime.fromISO(secondDate).setZone('America/Los_Angeles');
+    const start = DateTime.fromISO(firstDate).setZone('America/Los_Angeles', { keepLocalTime: true });
+    const end = DateTime.fromISO(secondDate).setZone('America/Los_Angeles', { keepLocalTime: true });
     if (start.c.year == end.c.year) {
         return `${start.toFormat('cccc, LLLL d')} – ${end.toFormat('cccc, LLLL d, y')}`
     } else {
