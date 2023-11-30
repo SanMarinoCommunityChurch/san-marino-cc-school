@@ -42,7 +42,7 @@
                     <div class="text-center mt-2 mb-8 lg:hidden">{entry.text}</div>
                     <div class="relative h-full rounded-xl shadow-xl">
                         <img
-                        class="w-full object-cover h-full rounded-xl"
+                        class="w-full object-cover h-full rounded-xl bg-cover bg-no-repeat bg-[50%]"
                         src={urlFor(entry.image)
                         .width(900)
                         .height(900)
@@ -52,7 +52,7 @@
                         style={`background-image: url(${entry.image.asset.metadata.lqip})`}
                         width={900}
                         height={900}
-                        loading="lazy"
+                        loading="eager"
                         decoding="async"
                     />
                     </div>
