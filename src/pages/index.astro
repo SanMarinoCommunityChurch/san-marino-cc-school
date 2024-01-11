@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ImageOpt from "@components/ImageOpt.astro";
+import { Image } from "astro:assets";
 import Button from "@components/Button.astro";
 import HighlightsGrid from "@components/HighlightsGrid.astro";
 import CTA from "@components/CTA.astro";
@@ -15,8 +16,8 @@ import { posts } from "@lib/posts"
 import { urlFor } from "@lib/sanity";
 import constructHref from "../utils/constructHref";
 
-// import paintSquare from "../assets/images/paint-square.webp?url"
-const paintSquare = "./src/assets/images/paint-square.webp"
+import paintSquare from "../assets/images/paint-square.webp"
+// const paintSquare = "./src/assets/images/paint-square.webp"
 
 const featuredTestimonials = testimonials.slice(0,3)
 const featuredPosts = posts.slice(0,3);
@@ -51,11 +52,14 @@ const { hero, intro, presentation, cta, seo } = homePage;
         class="absolute inset-0 z-[2] bg-gradient-to-r from-[#000000b3] to-[#00000000]"
       >
       </div>
-      <ImageOpt
+      <Image
         src={urlFor(hero.image).width(1200).height(Math.floor(1200 / hero.image.asset.metadata.dimensions.aspectRatio)).auto("format").url()}
         alt={hero.image.asset.altText || ""}
+        width={1200}
+        height={Math.floor(1200 / hero.image.asset.metadata.dimensions.aspectRatio)}
         class="absolute inset-0 w-full h-full object-cover | bg-center bg-no-repeat bg-cover"
         loading="eager"
+        format="webp"
         style={`background-image: url(${hero.image.asset.metadata.lqip})`}
       />
       <div
@@ -82,7 +86,7 @@ const { hero, intro, presentation, cta, seo } = homePage;
         <div class="relative">
           <HomeTabs client:load entries={presentation.entries} />
           <!-- <HomeFeatures client:load entries={presentation.entries} /> -->
-          <ImageOpt class="absolute -rotate-[14deg] opacity-90 w-[20rem] -bottom-12 -left-16" src={paintSquare} alt="" width={900} height={900} />
+          <Image class="absolute -rotate-[14deg] opacity-90 w-[20rem] -bottom-12 -left-16" src={paintSquare} alt="" width={900} height={900} format="webp" />
         </div>
         <div class="mx-auto text-center">
           <Button href={constructHref(presentation.linkItem.link)}>
@@ -90,7 +94,7 @@ const { hero, intro, presentation, cta, seo } = homePage;
           </Button>
         </div>
       </div>
-      <ImageOpt class="absolute w-32 -top-6 -right-4 rotate-12" src={paintSquare} alt="" width={900} height={900} />
+      <Image class="absolute w-32 -top-6 -right-4 rotate-12" src={paintSquare} alt="" width={900} height={900} format="webp" />
     </article>
     <div class="content-wrapper py-24">
       <h2 class="text-3xl text-center mb-8">Parent Testimonials</h2>

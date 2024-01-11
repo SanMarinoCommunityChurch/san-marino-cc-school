@@ -1,6 +1,7 @@
 ---
 import { urlFor } from "@lib/sanity";
 import ImageOpt from "./ImageOpt.astro";
+import { Image } from "astro:assets";
 const { content } = Astro.props;
 
 let showHeadingSection = false;
@@ -37,14 +38,17 @@ if (content.heading) {
             content.entries.map((slide) => {
               return (
                 <li class="splide__slide rounded-md">
-                  <ImageOpt
+                  <Image
                     class="w-full h-auto rounded-md | bg-center bg-no-repeat bg-cover"
                     src={urlFor(slide)
                       .width(1200)
                       .height(800)
                       .auto("format")
                       .url()}
+                      width={1200}
+                      height={800}
                     alt={slide.asset.altText || ""}
+                    format="webp"
                     style={`background-image: url(${slide.asset.metadata.lqip})`}
                   />
                 </li>
@@ -61,13 +65,16 @@ if (content.heading) {
             content.entries.map((slide) => {
               return (
                 <li class="splide__slide rounded-sm">
-                  <ImageOpt
+                  <Image
                     class="rounded-sm | bg-center bg-no-repeat bg-cover"
                     src={urlFor(slide)
                       .width(300)
                       .height(225)
                       .auto("format")
                       .url()}
+                      width={300}
+                      height={225}
+                      format="webp"
                     style={`background-image: url(${slide.asset.metadata.lqip})`}
                     alt={slide.asset.altText || ""}
                   />

@@ -2,6 +2,7 @@
 import { urlFor } from "@lib/sanity";
 import getYouTubeID from "get-youtube-id";
 import ImageOpt from "./ImageOpt.astro";
+import { Image } from "astro:assets";
 
 const { content, layout = "default", bgDecorativeImage } = Astro.props;
 ---
@@ -24,18 +25,21 @@ const { content, layout = "default", bgDecorativeImage } = Astro.props;
   {
     content.mediaType == "image" ? (
       <div class="relative">
-        <ImageOpt
+        <Image
           src={urlFor(content.image)
             .width(900)
             .height(675)
             .auto("format")
             .url()}
+            width={900}
+            height={675}
           alt={content.image.asset.altText || ""}
           class="img rounded-md"
           style={`background-image: url(${content.image.asset.metadata.lqip})`}
+          format="webp"
         />
         {bgDecorativeImage && 
-          <ImageOpt class={layout == 'flipped' ? "absolute w-3/4 -z-[1] -bottom-6 md:-bottom-12 rotate-6 -left-10" : 'absolute w-3/4 -z-[1] -bottom-6 md:-bottom-12 -rotate-6 -right-10'} src={bgDecorativeImage} alt="" width={900} height={900} />
+          <Image class={layout == 'flipped' ? "absolute w-3/4 -z-[1] -bottom-6 md:-bottom-12 rotate-6 -left-10" : 'absolute w-3/4 -z-[1] -bottom-6 md:-bottom-12 -rotate-6 -right-10'} src={bgDecorativeImage} alt="" width={900} height={900} format="webp" />
         }
       </div>
     ) : content.mediaType == "video" ? (

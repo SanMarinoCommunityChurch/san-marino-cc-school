@@ -1,6 +1,8 @@
 ---
 import { urlFor } from "../lib/sanity";
 import ImageOpt from "./ImageOpt.astro";
+import { Image } from "astro:assets";
+
 const props = Astro.props;
 const image = props.node;
 
@@ -29,13 +31,16 @@ const renderedImageHeight = image.crop
   : Math.floor(900 / image.asset.metadata.dimensions.aspectRatio);
 ---
 
-<ImageOpt
+<Image
   class="bg-cover bg-center bg-no-repeat"
   src={urlFor(image)
     .width(900)
     .height(renderedImageHeight)
     .auto("format")
     .url()}
+    width={900}
+    height={renderedImageHeight}
+    format="webp"
   alt={image.asset.altText || ""}
   style={`background-image: url(${image.asset.metadata.lqip})`}
 />

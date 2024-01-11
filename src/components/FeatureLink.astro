@@ -3,6 +3,7 @@ import Button from "./Button.astro";
 import { urlFor } from "../lib/sanity";
 import constructHref from "../utils/constructHref"
 import ImageOpt from "./ImageOpt.astro";
+import { Image } from "astro:assets";
 
 const themes = {
   "brand-light": {
@@ -40,10 +41,13 @@ let linkName = content.linkItem.linkName || content.linkItem.link.pageName;
     href={href}
     class="col-span-7 md:col-span-3 hover:[&>img]:scale-105 overflow-hidden rounded-md"
   >
-    <ImageOpt
+    <Image
       class="img rounded-md transition-transform duration-300"
       src={urlFor(content.image).width(800).height(640).auto("format").url()}
       alt={content.image.asset.altText || ""}
+      width={800}
+      height={640}
+      format="webp"
       style={`background-image: url(${content.image.asset.metadata.lqip})`}
     />
   </a>

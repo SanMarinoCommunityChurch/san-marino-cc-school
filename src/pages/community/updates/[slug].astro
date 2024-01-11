@@ -7,6 +7,7 @@ import getImageHeight from "../../../utils/getImageHeight"
 import { posts } from "../../../lib/posts"
 import { DateTime } from "luxon"
 import ImageOpt from "@components/ImageOpt.astro";
+import { Image } from "astro:assets";
 import { PortableText } from "astro-portabletext";
 
 export async function getStaticPaths() {
@@ -40,10 +41,13 @@ function assembleTimeRange(firstDatetime, secondDatetime) {
 <SectionPage pageName={post.name} headerText={post.preview} seo={post.seo}>
     <article class="content-wrapper flow | gap-12 mt-16 mb-24 md:my-24">
             {post.image &&
-            <ImageOpt 
+            <Image 
                 class="max-w-none w-full md:max-w-3xl mx-auto rounded-lg | bg-center bg-no-repeat bg-cover" 
                 src={urlFor(post.image)?.width(900).height(getImageHeight(post.image)).url()}
                 alt={post.image.asset.altText || ""}
+                width={900}
+                height={getImageHeight(post.image)}
+                format="webp"
                 style={`background-image: url(${post.image.asset.metadata.lqip})`}
             />
             }

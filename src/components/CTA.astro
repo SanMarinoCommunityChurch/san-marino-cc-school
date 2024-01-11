@@ -3,6 +3,7 @@ import Button from "./Button.astro";
 import { urlFor } from "@lib/sanity";
 import constructHref from "../utils/constructHref";
 import ImageOpt from "./ImageOpt.astro";
+import { Image } from "astro:assets";
 
 const { content } = Astro.props;
 let overlayColor = "bg-[#00000093]";
@@ -33,9 +34,12 @@ if (content.accent === "brand-light") {
   </div>
   <div class:list={["absolute inset-0 z-[1] mix-blend-multiply", overlayColor]}>
   </div>
-  <ImageOpt
+  <Image
     src={urlFor(content.image).width(1200).height(Math.floor(1200 / content.image.asset.metadata.dimensions.aspectRatio)).auto("format").url()}
+    width={1200}
+    height={Math.floor(1200 / content.image.asset.metadata.dimensions.aspectRatio)}
     alt={content.image.asset.altText || ""}
+    format="webp"
     class="absolute inset-0 w-full h-full object-cover saturate-0 opacity-40"
   />
 </article>

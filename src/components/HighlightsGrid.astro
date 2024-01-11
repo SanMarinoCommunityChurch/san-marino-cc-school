@@ -3,19 +3,20 @@ import Button from "./Button.astro";
 import constructHref from "../utils/constructHref";
 import shuffleArray from "../utils/shuffleArray"
 import ImageOpt from "./ImageOpt.astro";
+import { Image } from "astro:assets";
 
-// import confetti from "../assets/images/confetti.webp?url"
-// import star from "../assets/images/star.webp?url"
-// import paintSmear from "../assets/images/paint-smear.webp?url"
-// import abstractRing from "../assets/images/abstract-ring.webp?url"
-// import notepadSheet from "../assets/images/notepad-sheet.webp?url"
-// import tape from "../assets/images/tape.webp?url"
-const confetti = "./src/assets/images/confetti.webp"
-const star = "./src/assets/images/star.webp"
-const paintSmear = "./src/assets/images/paint-smear.webp"
-const abstractRing = "./src/assets/images/abstract-ring.webp"
-const notepadSheet = "./src/assets/images/notepad-sheet.webp"
-const tape = "./src/assets/images/tape.webp"
+import confetti from "../assets/images/confetti.webp"
+import star from "../assets/images/star.webp"
+import paintSmear from "../assets/images/paint-smear.webp"
+import abstractRing from "../assets/images/abstract-ring.webp"
+import notepadSheet from "../assets/images/notepad-sheet.webp"
+import tape from "../assets/images/tape.webp"
+// const confetti = "./src/assets/images/confetti.webp"
+// const star = "./src/assets/images/star.webp"
+// const paintSmear = "./src/assets/images/paint-smear.webp"
+// const abstractRing = "./src/assets/images/abstract-ring.webp"
+// const notepadSheet = "./src/assets/images/notepad-sheet.webp"
+// const tape = "./src/assets/images/tape.webp"
 
 const bgDecorativeImages = [
   confetti,
@@ -53,7 +54,7 @@ const shuffledBgs = randomBgs ? shuffleArray(bgDecorativeImages) : undefined;
       const bgImage = randomBgs ? shuffledBgs[index % 6] : bgDecorativeImages[index % 6]
       return (
         <div class="relative flow gap-6">
-          <ImageOpt class="absolute w-20 -z-[1] -top-5 -left-6 opacity-25" src={bgImage} alt="" width={600} height={600} />
+          <Image class="absolute w-20 -z-[1] -top-5 -left-6 opacity-25" src={bgImage} alt="" width={600} height={600} format="webp" />
           <h3 class="text-2xl">{item.heading}</h3>
           <p>{item.text}</p>
           {item.linkItem && (
