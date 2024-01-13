@@ -170,6 +170,20 @@ export const pages = await getSanityData(`*[_type == 'page']{
         asset->
       }
     },
+    _type == 'staffIndex' => {
+      "type": _type,
+      heading,
+      entries[]->{
+        name,
+        title,
+        "image": image{
+          ...,
+          asset->
+        },
+        isDirector,
+        bio
+      }
+    },
     _type == 'dateList' => {
       "type": _type,
       heading,

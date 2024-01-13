@@ -5,6 +5,7 @@ import Gallery from "@components/Gallery.astro";
 import FeatureList from "@components/FeatureList.astro";
 import IntroSectionList from "@components/IntroSectionList.astro";
 import HighlightsGrid from "@components/HighlightsGrid.astro";
+import StaffGallery from "@components/StaffGallery.astro";
 import DateList from "@components/DateList.astro";
 import CTA from "@components/CTA.astro";
 import FAQSection from "@components/FAQSection.astro";
@@ -61,6 +62,11 @@ const { page } = Astro.props;
                 <article class="content-wrapper">
                   <DateList content={section} />
                 </article>
+              )}
+              {section.type == 'staffIndex' && (
+                <article class="content-wrapper">
+                  <StaffGallery content={section} />
+                  </article>
               )}
               {section.type == "faq" && (
                 <article class="content-wrapper | w-full">

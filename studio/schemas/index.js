@@ -10,6 +10,8 @@ import faq from './faq'
 import dateList from './dateList'
 import postType from './postType'
 import post from './post'
+import staff from './staff.js'
+import staffIndex from './staffIndex.js'
 import highlightGrid from './highlightGrid'
 import contentFeature from './contentFeature'
 import callToAction from './callToAction'
@@ -36,6 +38,8 @@ export const schemaTypes = [
   callToAction,
   richContent,
   post,
+  staff,
+  staffIndex,
   postType,
   link,
   testimonial,

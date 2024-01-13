@@ -126,6 +126,9 @@ export default {
           type: 'dateList',
         },
         {
+          type: 'staffIndex',
+        },
+        {
           type: 'cta',
         },
       ],

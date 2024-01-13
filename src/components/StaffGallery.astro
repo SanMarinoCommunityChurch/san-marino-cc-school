@@ -1,0 +1,50 @@
+---
+import { Image } from "astro:assets";
+import {urlFor} from "../lib/sanity"
+import RichContent from "./RichContent.astro";
+
+const { content } = Astro.props;
+
+let showHeadingSection = false;
+if (content.heading) {
+  showHeadingSection = true;
+} else if (content.text) {
+  showHeadingSection = true;
+}
+
+const director = content.entries.find((staff) => staff.isDirector);
+---
+
+<div>
+  {
+    showHeadingSection && (
+      <div class="center-items mb-20">
+        {content.heading && <h2 class="text-4xl mb-6">{content.heading}</h2>}
+        {content.text && (
+          <p class="text-2xl leading-[1.4] max-w-3xl">{content.text}</p>
+        )}
+      </div>
+    )
+  }
+  <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    {content.entries.map((staff) => {
+        return (
+            <div class="flow gap-2">
+                {staff.image && (
+                    <Image class="aspect-[4/5] object-cover" src={urlFor(staff.image).width(400).height(500).auto('format').url()} width={400} height={500} alt={staff.name || ""} format="webp" />
+                )}
+                <h3 class="text-xl">{staff.name}</h3>
+                <p>{staff.title}</p>
+            </div>
+        )
+    })}
+  </section>
+  <section class="mt-16 grid items-center grid-cols-1 md:grid-cols-6 gap-12">
+    {director.image && (
+        <Image class="aspect-[4/6] object-cover md:col-span-2" src={urlFor(director.image).width(600).height(900).auto('format').url()} width={600} height={900} alt={director.name || ""} format="webp" />
+    )}
+    <div class="flow gap-6 md:col-span-4">
+        <RichContent content={director.bio.content} />
+    </div>
+  </section>
+</div>

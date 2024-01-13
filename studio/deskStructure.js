@@ -7,6 +7,7 @@ import {
   HiSquares2X2,
   HiTag,
   HiUsers,
+  HiChatBubbleLeftRight,
 } from 'react-icons/hi2'
 
 export const deskStructure = (S) =>
@@ -22,8 +23,12 @@ export const deskStructure = (S) =>
             .items([
               //move dynamic content here
               S.listItem()
-                .title('Testimonials')
+                .title('Staff Members')
                 .icon(HiUsers)
+                .child(S.documentTypeList('staffMember').title('Staff Members')),
+              S.listItem()
+                .title('Testimonials')
+                .icon(HiChatBubbleLeftRight)
                 .child(S.documentTypeList('testimonial').title('All Testimonials')),
               S.listItem()
                 .title('News Posts')
